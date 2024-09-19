@@ -1,0 +1,12 @@
+Assest/JohnFarmer
+Library/
+Temp/
+.vscode/
+Logs/
+UserSetting/
+Packages/
+*.sln
+*.csproj
+*.userprefs
+*.unityproj
+*.DS_Store
