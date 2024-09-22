@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2708e4084c4a1534ba646096300f778c, type: 3}
+  m_Name: Room_CorridorEW_MyRooms_1
+  m_EditorClassIdentifier: 
+  guid: 9ba111cd0d78e5444a41ad00898b6508
+  prefab: {fileID: 28570228972821463, guid: 27af92d5c69956b45a08c450ac603ea4, type: 3}
+  previousPrefab: {fileID: 28570228972821463, guid: 27af92d5c69956b45a08c450ac603ea4, type: 3}
+  roomNodeType: {fileID: 11400000, guid: 9462c7de7da2b554fab8015d0d12aea3, type: 2}
+  lowerBounds: {x: -11, y: -2}
+  upperBounds: {x: 0, y: 5}
+  doorwayList:
+  - position: {x: -11, y: 0}
+    orientation: 3
+    doorPrefab: {fileID: 0}
+    doorwayStartCopyPosition: {x: 0, y: 0}
+    doorwayCopyTileWidth: 0
+    doorwayCopyTileHeight: 0
+    isConnected: 0
+    isUnavailable: 0
+  - position: {x: 0, y: 0}
+    orientation: 1
+    doorPrefab: {fileID: 0}
+    doorwayStartCopyPosition: {x: 0, y: 0}
+    doorwayCopyTileWidth: 0
+    doorwayCopyTileHeight: 0
+    isConnected: 0
+    isUnavailable: 0
+  spawnPositionArray:
+  - {x: -5, y: 0}

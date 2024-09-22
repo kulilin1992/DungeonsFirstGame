@@ -27,4 +27,18 @@ public class GameResources : MonoBehaviour
     [Tooltip("Populated with the dungeon RoomNodeTypeListSO")]
     #endregion
     public RoomNodeTypeListSO roomNodeTypeList;
+
+    [Space(10)]
+    [Header("MATERIALS")]
+    [Tooltip("Dimmed Material")]
+    public Material dimmedMaterial;
+
+    #region Header PLAYER
+    [Space(10)]
+    [Header("PLAYER")]
+    #endregion Header PLAYER
+    #region Tooltip
+    [Tooltip("the current player scriptable object")]
+    #endregion Tooltip
+    public CurrentPlayerSO currentPlayer;
 }
