@@ -31,6 +31,19 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     [SerializeField] private int currentDungeonLevelListIndex = 0;
     [HideInInspector] public GameState gameState;
 
+    private Room currentRoom;
+    private Room previousRoom;
+    private PlayerDetailsSO playerDetails;
+    private Player player;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        playerDetails = GameResources.Instance.currentPlayer.playerDetails;
+
+        InstantiatePlayer();
+    }
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -63,6 +76,15 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 #endif
 
     #endregion Validation
+
+    private void InstantiatePlayer()
+    {
+        GameObject playerGameObject = Instantiate(playerDetails.playerPrefab);
+
+        player = playerGameObject.GetComponent<Player>();
+
+        player.Initialize(playerDetails);
+    }
 
     private void HandleGameState()
     {
@@ -200,16 +222,32 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         // // Call static event that room has changed.
         // StaticEventHandler.CallRoomChangedEvent(currentRoom);
 
-        // // Set player roughly mid-room
-        // player.gameObject.transform.position = new Vector3((currentRoom.lowerBounds.x + currentRoom.upperBounds.x) / 2f, (currentRoom.lowerBounds.y + currentRoom.upperBounds.y) / 2f, 0f);
+        // Set player roughly mid-room
+        player.gameObject.transform.position = new Vector3((currentRoom.lowerBounds.x + currentRoom.upperBounds.x) / 2f,
+            (currentRoom.lowerBounds.y + currentRoom.upperBounds.y) / 2f, 0f);
 
-        // // Get nearest spawn point in room nearest to player
-        // player.gameObject.transform.position = HelperUtilities.GetSpawnPositionNearestToPlayer(player.gameObject.transform.position);
+        // Get nearest spawn point in room nearest to player
+        player.gameObject.transform.position = HelperUtilities.GetSpawnPositionNearestToPlayer(player.gameObject.transform.position);
 
         // // Display Dungeon Level Text
         // StartCoroutine(DisplayDungeonLevelText());
 
         //// ** Demo code
         //RoomEnemiesDefeated();
+    }
+
+    public void SetCurrentRoom(Room room)
+    {
+        previousRoom = currentRoom;
+        currentRoom = room;
+    }
+
+    public Room GetCurrentRoom()
+    {
+        return currentRoom;
+    }
+
+    public Player GetPlayer() {
+        return player;
     }
 }
