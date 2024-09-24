@@ -77,6 +77,21 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     #endregion Validation
 
+    private void OnEnable ()
+    {
+        StaticEventHandler.OnRoomChanged += OnRoomChanged;
+    }
+
+    void OnDisable ()
+    {
+        StaticEventHandler.OnRoomChanged -= OnRoomChanged;
+    }
+
+    private void OnRoomChanged(RoomChangedEventArgs args)
+    {
+        SetCurrentRoom(args.room);
+    }
+
     private void InstantiatePlayer()
     {
         GameObject playerGameObject = Instantiate(playerDetails.playerPrefab);

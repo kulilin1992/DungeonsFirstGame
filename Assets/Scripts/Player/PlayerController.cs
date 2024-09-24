@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[RequireComponent(typeof(Player))]
+[DisallowMultipleComponent]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private Transform weaponShootPosition;
+    //[SerializeField] private Transform weaponShootPosition;
 
     [SerializeField] private MovementDetailsSO movementDetails;
 
@@ -16,6 +19,8 @@ public class PlayerController : MonoBehaviour
     private WaitForFixedUpdate waitForFixedUpdate;
     private bool isPlayerRolling = false;
     private float playerRollCooldownTimer = 0f;
+
+    private int currentWeaponIndex = 1;
 
     #region Validation
 #if UNITY_EDITOR
@@ -35,6 +40,8 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         waitForFixedUpdate = new WaitForFixedUpdate();
+        SetPlayerAnimationSpeed();
+        SetStartingWeapon();
     }
     private void Update()
     {
@@ -89,13 +96,15 @@ public class PlayerController : MonoBehaviour
         AimDirection playerAimDirection;
 
         AimWeaponInput(out weaponDirection, out weaponAngleDegress, out playerAngleDegrees, out playerAimDirection);
+        FireWeaponInput(weaponDirection, weaponAngleDegress, playerAngleDegrees, playerAimDirection);
     }
 
     private void AimWeaponInput(out Vector3 weaponDirection, out float weaponAngleDegress, out float playerAngleDegrees, out AimDirection playerAimDirection)
     {
         Vector3 mouseWorldPosition = HelperUtilities.GetMouseWorldPosition();
 
-        weaponDirection = mouseWorldPosition - weaponShootPosition.position;
+        //weaponDirection = mouseWorldPosition - weaponShootPosition.position;
+        weaponDirection = mouseWorldPosition - player.activeWeapon.GetShootPosition();
 
         Vector3 playerDirection = mouseWorldPosition - transform.position;
 
@@ -106,6 +115,14 @@ public class PlayerController : MonoBehaviour
         playerAimDirection = HelperUtilities.GetAimDirection(playerAngleDegrees);
 
         player.aimWeaponEvent.CallAimWeaponEvent(playerAimDirection, playerAngleDegrees, weaponAngleDegress, weaponDirection);
+    }
+
+    private void FireWeaponInput(Vector3 weaponDirection, float weaponAngleDegress, float playerAngleDegrees, AimDirection playerAimDirection)
+    {
+        if (Input.GetMouseButton(0)) {
+            Debug.Log("Fire Weapon");
+            player.fireWeaponEvent.CallFireWeaponEvent(true, playerAimDirection, playerAngleDegrees, weaponAngleDegress, weaponDirection);
+        }
     }
 
     private void PlayerRoll(Vector3 direction)
@@ -138,6 +155,31 @@ public class PlayerController : MonoBehaviour
         if (playerRollCoroutine != null) {
             StopCoroutine(playerRollCoroutine);
             isPlayerRolling = false;
+        }
+    }
+
+    private void SetPlayerAnimationSpeed()
+    {
+        player.animator.speed = moveSpeed / Settings.baseSpeedForPlayerAnimations;
+    }
+
+    private void SetStartingWeapon()
+    {
+        int index = 1;
+        foreach (Weapon weapon in player.weaponList) {
+            if (weapon.weaponDetails == player.playerDetails.startingWeapon) {
+                SetWeaponByIndex(index);
+                break;
+            }
+            index++;
+        }
+    }
+
+    private void SetWeaponByIndex(int index)
+    {
+        if (index - 1 < player.weaponList.Count) {
+            currentWeaponIndex = index - 1;
+            player.setActiveWeaponEvent.CallSetActiveWeaponEvent(player.weaponList[index - 1]);
         }
     }
 }

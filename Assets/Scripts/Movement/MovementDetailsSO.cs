@@ -16,7 +16,7 @@ public class MovementDetailsSO : ScriptableObject
 #if UNITY_EDITOR
     private void OnValidate()
     {
-        HelperUtilities.ValidateCheckPositionRange(this, nameof(minMoveSpeed), minMoveSpeed, nameof(maxMoveSpeed),
+        HelperUtilities.ValidateCheckPositiveRange(this, nameof(minMoveSpeed), minMoveSpeed, nameof(maxMoveSpeed),
             maxMoveSpeed, false);
         if (rollSpeed != 0f || rollDistance != 0f || rollCooldownTime != 0f)
         {
