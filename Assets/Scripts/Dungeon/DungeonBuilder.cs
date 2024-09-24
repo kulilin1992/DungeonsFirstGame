@@ -20,6 +20,16 @@ public class DungeonBuilder : SingletonMonobehaviour<DungeonBuilder>
 
         LoadRoomNodeTypeList();
 
+        //GameResources.Instance.dimmedMaterial.SetFloat("Alpha_Slider", 1f);
+    }
+
+    private void OnEnable()
+    {
+        GameResources.Instance.dimmedMaterial.SetFloat("Alpha_Slider", 0f);
+    }
+
+    private void OnDisable()
+    {
         GameResources.Instance.dimmedMaterial.SetFloat("Alpha_Slider", 1f);
     }
 

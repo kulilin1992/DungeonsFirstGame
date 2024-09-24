@@ -41,4 +41,25 @@ public class GameResources : MonoBehaviour
     [Tooltip("the current player scriptable object")]
     #endregion Tooltip
     public CurrentPlayerSO currentPlayer;
+
+    public Material litDefaultMaterial;
+    public Shader variableLitShader;
+
+    #region Validation
+
+#if UNITY_EDITOR
+
+    // Validate SO fields
+    private void OnValidate()
+    {
+        HelperUtilities.ValidateCheckNullValue(this, nameof(roomNodeTypeList), roomNodeTypeList);
+        HelperUtilities.ValidateCheckNullValue(this, nameof(currentPlayer), currentPlayer);
+        HelperUtilities.ValidateCheckNullValue(this, nameof(litDefaultMaterial), litDefaultMaterial);
+        HelperUtilities.ValidateCheckNullValue(this, nameof(dimmedMaterial), dimmedMaterial);
+        HelperUtilities.ValidateCheckNullValue(this, nameof(variableLitShader), variableLitShader);
+    }
+
+#endif
+
+    #endregion Validation
 }

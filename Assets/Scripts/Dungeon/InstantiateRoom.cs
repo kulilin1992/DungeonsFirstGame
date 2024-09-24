@@ -24,10 +24,19 @@ public class InstantiateRoom : MonoBehaviour
         boxCollider2D = GetComponent<BoxCollider2D>();
         roomColliderBounds = boxCollider2D.bounds;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision){
+        if (collision.tag == Settings.playerTag && room != GameManager.Instance.GetCurrentRoom()) {
+            this.room.isPreviouslyVisited = true;
+            StaticEventHandler.CallRoomChangedEvent(room);
+        }
+    }
     public void Initialise(GameObject roomGameObject) {
         PopulateTilemapMemberVariables(roomGameObject);
 
         BlockOffUnusedDoorWays();
+
+        AddDoorsToRoom();
 
         DisableCollisionTilemapRenderer();
     }
@@ -165,6 +174,45 @@ public class InstantiateRoom : MonoBehaviour
                 // set rotation of tile being copied
                 tilemap.SetTransformMatrix(new Vector3Int(startPosition.x + 1 + xPos, startPosition.y - yPos, 0), transformMatrix);
 
+            }
+        }
+    }
+
+    private void AddDoorsToRoom()
+    {
+        if (room.roomNodeType.isCorridorEW || room.roomNodeType.isCorridorNS) return;
+        foreach (Doorway doorway in room.doorWayList) {
+            if (doorway.doorPrefab != null && doorway.isConnected) {
+                float tileDistance = Settings.tileSizePixel / Settings.pixelPerUnit;
+                GameObject door = null;
+
+                if (doorway.orientation == Orientation.north) {
+                    door = Instantiate(doorway.doorPrefab, gameObject.transform);
+                    door.transform.localPosition = new Vector3(doorway.position.x + tileDistance / 2f, doorway.position.y + tileDistance, 0);
+                }
+                else if (doorway.orientation == Orientation.south)
+                {
+                    door = Instantiate(doorway.doorPrefab, gameObject.transform);
+                    door.transform.localPosition = new Vector3(doorway.position.x + tileDistance / 2f, doorway.position.y, 0);
+                }
+                else if ((doorway.orientation == Orientation.east))
+                {
+                    door = Instantiate(doorway.doorPrefab, gameObject.transform);
+                    door.transform.localPosition = new Vector3(doorway.position.x + tileDistance, doorway.position.y + tileDistance * 1.25f, 0);
+                }
+                else if (doorway.orientation == Orientation.west)
+                {
+                    door = Instantiate(doorway.doorPrefab, gameObject.transform);
+                    door.transform.localPosition = new Vector3 (doorway.position.x, doorway.position.y + tileDistance * 1.25f, 0);
+                }
+
+                if (room.roomNodeType.isBossRoom) {
+                    Door doorComponent = door.GetComponent<Door>();
+                    if (doorComponent != null) {
+                        doorComponent.isBossRoomDoor = true;
+                        doorComponent.LockDoor();
+                    }
+                }
             }
         }
     }

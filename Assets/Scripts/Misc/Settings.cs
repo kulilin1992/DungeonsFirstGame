@@ -4,9 +4,11 @@ using UnityEngine;
 
 public static class Settings
 {
+    //build dungeon
     public const int maxDungeonRebuildAttemptsForRoomGraph = 1000;
     public const int maxDungeonBuildAttempts = 10;
     public const int maxChildCorridors = 3;
+    public const float fadeInTime = 0.5f;
 
     #region ANIMATOR PARAMETERS
     public static int aimUp = Animator.StringToHash("aimUp");
@@ -22,4 +24,13 @@ public static class Settings
     public static int rollLeft = Animator.StringToHash("rollLeft");
     public static int rollDown = Animator.StringToHash("rollDown");
     #endregion
+
+    //door
+    public const float pixelPerUnit = 16f;
+    public const float tileSizePixel = 16f;
+    public static int open = Animator.StringToHash("open");
+
+    //gameobject tags
+    public const string playerTag = "Player";
+    public const string playerWeapon = "playerWeapon";
 }

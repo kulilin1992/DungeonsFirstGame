@@ -9,6 +9,8 @@ public class CinemachineTarget : MonoBehaviour
 {
     private CinemachineTargetGroup targetGroup;
 
+    [SerializeField] private Transform cursorTarget;
+
     private void Awake()
     {
         targetGroup = GetComponent<CinemachineTargetGroup>();
@@ -21,11 +23,22 @@ public class CinemachineTarget : MonoBehaviour
 
     private void SetCinemachineTargetGroup()
     {
-        CinemachineTargetGroup.Target target_player = new CinemachineTargetGroup.Target { weight = 1, radius = 1f,
+        CinemachineTargetGroup.Target target_player = new CinemachineTargetGroup.Target { weight = 1, radius = 2.5f,
             target = GameManager.Instance.GetPlayer().transform };
 
-        CinemachineTargetGroup.Target[] cinemachineTargets = new CinemachineTargetGroup.Target[] { target_player };
+        CinemachineTargetGroup.Target target_cursor = new CinemachineTargetGroup.Target { weight = 1, radius = 1f,
+            target = cursorTarget};
+
+        CinemachineTargetGroup.Target[] cinemachineTargets = new CinemachineTargetGroup.Target[] { target_player, target_cursor};
 
         targetGroup.m_Targets = cinemachineTargets;
+    }
+
+    private void Update()
+    {
+        if (cursorTarget != null)
+        {
+            cursorTarget.position = HelperUtilities.GetMouseWorldPosition();
+        }
     }
 }
