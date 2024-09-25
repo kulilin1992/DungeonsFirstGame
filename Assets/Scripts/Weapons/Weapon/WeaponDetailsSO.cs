@@ -24,6 +24,9 @@ public class WeaponDetailsSO : ScriptableObject
 
     public float weaponReloadTime = 0f;
 
+    public SoundEffectSO weaponFiringSoundEffect;
+    public SoundEffectSO weaponReloadingSoundEffect;
+
     #region Validation
 
 #if UNITY_EDITOR

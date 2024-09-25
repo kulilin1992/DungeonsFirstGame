@@ -38,4 +38,7 @@ public static class Settings
 
     //fire
     public const float useAimAngleDistance = 3.5f;
+
+    //ui
+    public const float uiAmmoIconSpacing = 4f;
 }

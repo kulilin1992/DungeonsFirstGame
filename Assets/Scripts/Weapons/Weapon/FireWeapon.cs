@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(ActiveWeapon))]
 [RequireComponent(typeof(FireWeaponEvent))]
 [RequireComponent(typeof(WeaponFireEvent))]
+[RequireComponent(typeof(ReloadWeaponEvent))]
 [DisallowMultipleComponent]
 public class FireWeapon : MonoBehaviour
 {
@@ -12,12 +13,16 @@ public class FireWeapon : MonoBehaviour
     private ActiveWeapon activeWeapon;
     private FireWeaponEvent fireWeaponEvent;
     private WeaponFireEvent weaponFireEvent;
+    private ReloadWeaponEvent reloadWeaponEvent;
+
+    private float firePreChargeTimer = 0f;
 
     private void Awake()
     {
         activeWeapon = GetComponent<ActiveWeapon>();
         fireWeaponEvent = GetComponent<FireWeaponEvent>();
         weaponFireEvent = GetComponent<WeaponFireEvent>();
+        reloadWeaponEvent = GetComponent<ReloadWeaponEvent>();
     }
     private void OnEnable()
     {
@@ -41,12 +46,15 @@ public class FireWeapon : MonoBehaviour
 
     private void WeaponFire(FireWeaponEventArgs args)
     {
+        WeaponPreCharge(args);
         if (args.fire)
         {
             if (IsWeaponReadyToFire()) {
-                Debug.Log("Weapon Fired");
+                //Debug.Log("Weapon Fired");
                 FireAmmo(args.aimAngle, args.weaponAimAngle, args.weaponAimDirectionVector);
                 ResetCoolDownTimer();
+
+                ResetPrechargeTimer();
             }
         }
     }
@@ -58,11 +66,17 @@ public class FireWeapon : MonoBehaviour
             return false;
         if (activeWeapon.GetCurrentWeapon().isWeaponReloading)
             return false;
-        if (fireRateCoolDownTimer > 0)
+        if (firePreChargeTimer > 0f || fireRateCoolDownTimer > 0f)
             return false;
+        // if (!activeWeapon.GetCurrentWeapon().weaponDetails.hasInfiniteClipCapacity &&
+        // activeWeapon.GetCurrentWeapon().weaponClipRemainingAmmo <= 0)
+        //     return false;
         if (!activeWeapon.GetCurrentWeapon().weaponDetails.hasInfiniteClipCapacity &&
-        activeWeapon.GetCurrentWeapon().weaponClipRemainingAmmo <= 0)
-            return false;
+             activeWeapon.GetCurrentWeapon().weaponClipRemainingAmmo <= 0)
+            {
+                reloadWeaponEvent.CallReloadWeaponEvent(activeWeapon.GetCurrentWeapon(), 0);
+                return false;
+            }
         return true;
     }
 
@@ -72,7 +86,66 @@ public class FireWeapon : MonoBehaviour
 
         if (currentAmmo != null)
         {
-            Debug.Log("asss");
+            StartCoroutine(FireAmmoRoutine(currentAmmo, aimAngle, weaponAimAngle, weaponAimDirectionVector));
+            // GameObject ammoPrefab = currentAmmo.ammoPrefabs[Random.Range(0, currentAmmo.ammoPrefabs.Length)];
+
+            // float ammoSpeed = Random.Range(currentAmmo.ammoSpeedMin, currentAmmo.ammoSpeedMax);
+
+            // IFireable ammo = (IFireable)PoolManager.Instance.ReuseComponent(ammoPrefab, activeWeapon.GetShootPosition(),
+            //     Quaternion.identity);
+            
+            // ammo.InitialiseAmmo(currentAmmo, aimAngle, weaponAimAngle, ammoSpeed, weaponAimDirectionVector);
+
+            // if (!activeWeapon.GetCurrentWeapon().weaponDetails.hasInfiniteClipCapacity) {
+            //     activeWeapon.GetCurrentWeapon().weaponClipRemainingAmmo--;
+            //     activeWeapon.GetCurrentWeapon().weaponRemainingAmmo--;
+            // }
+
+            // weaponFireEvent.CallWeaponFireEvent(activeWeapon.GetCurrentWeapon());
+        }
+    }
+
+    private void ResetCoolDownTimer()
+    {
+        fireRateCoolDownTimer = activeWeapon.GetCurrentWeapon().weaponDetails.weaponFireRate;
+    }
+    
+    private void WeaponPreCharge(FireWeaponEventArgs args)
+    {
+        if (args.firePreviousFrame) {
+            firePreChargeTimer -= Time.deltaTime;
+        }
+        else
+        {
+            ResetPrechargeTimer();
+        }
+    }
+
+    private void ResetPrechargeTimer()
+    {
+        firePreChargeTimer = activeWeapon.GetCurrentWeapon().weaponDetails.weaponPrechargeTime;
+    }
+
+    private IEnumerator FireAmmoRoutine(AmmoDetailsSO currentAmmo, float aimAngle,
+        float weaponAimAngle, Vector3 weaponAimDirectionVector)
+    {
+        int ammoCounter = 0;
+
+        int ammoPerShot = Random.Range(currentAmmo.ammoSpawnAmountMin, currentAmmo.ammoSpawnAmountMax + 1);
+        
+        float ammoSpawnInterval;
+
+        if (ammoPerShot > 1) {
+            ammoSpawnInterval = Random.Range(currentAmmo.ammoSpawnIntervalMin, currentAmmo.ammoSpawnIntervalMax);
+        }
+        else
+        {
+            ammoSpawnInterval = 0f;
+        }
+
+        while (ammoCounter < ammoPerShot)
+        {
+            ammoCounter++;
             GameObject ammoPrefab = currentAmmo.ammoPrefabs[Random.Range(0, currentAmmo.ammoPrefabs.Length)];
 
             float ammoSpeed = Random.Range(currentAmmo.ammoSpeedMin, currentAmmo.ammoSpeedMax);
@@ -81,18 +154,22 @@ public class FireWeapon : MonoBehaviour
                 Quaternion.identity);
             
             ammo.InitialiseAmmo(currentAmmo, aimAngle, weaponAimAngle, ammoSpeed, weaponAimDirectionVector);
-
+            yield return new WaitForSeconds(ammoSpawnInterval);
+        }
             if (!activeWeapon.GetCurrentWeapon().weaponDetails.hasInfiniteClipCapacity) {
                 activeWeapon.GetCurrentWeapon().weaponClipRemainingAmmo--;
                 activeWeapon.GetCurrentWeapon().weaponRemainingAmmo--;
             }
 
             weaponFireEvent.CallWeaponFireEvent(activeWeapon.GetCurrentWeapon());
-        }
+
+            WeaponSoundEffect();
     }
 
-    private void ResetCoolDownTimer()
+    private void WeaponSoundEffect()
     {
-        fireRateCoolDownTimer = activeWeapon.GetCurrentWeapon().weaponDetails.weaponFireRate;
+        if (activeWeapon.GetCurrentWeapon().weaponDetails.weaponFiringSoundEffect != null) {
+            SoundEffectManager.Instance.PlaySoundEffect(activeWeapon.GetCurrentWeapon().weaponDetails.weaponFiringSoundEffect);
+        }
     }
 }

@@ -56,9 +56,9 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         HandleGameState();
 
         //for testing
-        if (Input.GetKeyDown(KeyCode.R)) {
-            gameState = GameState.gameStarted;
-        }
+        // if (Input.GetKeyDown(KeyCode.R)) {
+        //     gameState = GameState.gameStarted;
+        // }
     }
 
     #region Validation
@@ -264,5 +264,10 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     public Player GetPlayer() {
         return player;
+    }
+
+    public Sprite GetPlayerMiniMapIcon()
+    {
+        return playerDetails.playerMiniMapIcon;
     }
 }

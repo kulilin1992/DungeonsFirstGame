@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b129082b41e83241bb777db4c59a89e, type: 3}
+  m_Name: WeaponDetails_MP7
+  m_EditorClassIdentifier: 
+  weaponName: MP7
+  weaponIcon: {fileID: 21300000, guid: a735f74a317b5f944929af56be472cb7, type: 3}
+  weaponShootPosition: {x: 1.146, y: 0.277, z: 0}
+  weaponCurrentAmmo: {fileID: 11400000, guid: 24f4911208a91bb4d937417761b82c0e, type: 2}
+  hasInfiniteAmmo: 0
+  hasInfiniteClipCapacity: 0
+  weaponClipAmmoCapacity: 20
+  weaponAmmoCapacity: 60
+  weaponFireRate: 0.15
+  weaponPrechargeTime: 0
+  weaponReloadTime: 2
+  weaponFiringSoundEffect: {fileID: 11400000, guid: 0283fe7ae0c55be45995baf33c1e3780, type: 2}
+  weaponReloadingSoundEffect: {fileID: 11400000, guid: 6a8eb26062c1b6d4fafa026e81fb7bc4, type: 2}

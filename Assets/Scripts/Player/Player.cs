@@ -36,6 +36,10 @@ using UnityEngine.Rendering;
 [RequireComponent(typeof(WeaponFireEvent))]
 [RequireComponent(typeof(FireWeapon))]
 
+[RequireComponent(typeof(ReloadWeaponEvent))]
+[RequireComponent(typeof(WeaponReloadEvent))]
+[RequireComponent(typeof(ReloadWeapon))]
+
 [DisallowMultipleComponent]
 #endregion
 public class Player : MonoBehaviour
@@ -60,6 +64,10 @@ public class Player : MonoBehaviour
    [HideInInspector] public ActiveWeapon activeWeapon;
    [HideInInspector] public WeaponFireEvent weaponFireEvent;
    [HideInInspector] public FireWeaponEvent fireWeaponEvent;
+
+   [HideInInspector] public ReloadWeaponEvent reloadWeaponEvent;
+   [HideInInspector] public WeaponReloadEvent weaponReloadEvent;
+  
    
    public List<Weapon> weaponList = new List<Weapon>();
 
@@ -81,6 +89,9 @@ public class Player : MonoBehaviour
 
         weaponFireEvent = GetComponent<WeaponFireEvent>();
         fireWeaponEvent = GetComponent<FireWeaponEvent>();
+
+        reloadWeaponEvent = GetComponent<ReloadWeaponEvent>();
+        weaponReloadEvent = GetComponent<WeaponReloadEvent>();
    }
 
    public void Initialize(PlayerDetailsSO playerDetails)

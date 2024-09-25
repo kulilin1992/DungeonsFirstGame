@@ -176,4 +176,9 @@ public static class HelperUtilities
         return nearestSpawnPosition;
     }
     
+    //sound
+    public static float LinearToDicibels(int linear) {
+        float linearScaleRange = 20f;
+        return Mathf.Log10((float)linear / linearScaleRange) * 20f;
+    }
 }

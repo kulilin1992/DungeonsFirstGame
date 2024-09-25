@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class GameResources : MonoBehaviour
 {
@@ -45,6 +46,20 @@ public class GameResources : MonoBehaviour
     public Material litDefaultMaterial;
     public Shader variableLitShader;
 
+    #region Header UI
+    [Space(10)]
+    [Header("UI")]
+    #endregion Header UI
+    #region Tooltip
+    [Tooltip("populate with ammo icon prefab")]
+    #endregion Tooltip
+    public GameObject ammoIconPrefab;
+
+    //sound
+    public AudioMixerGroup soundMasterMixerGroup;
+
+    public SoundEffectSO doorOpenCloseSoundEffect;
+
     #region Validation
 
 #if UNITY_EDITOR
@@ -57,6 +72,8 @@ public class GameResources : MonoBehaviour
         HelperUtilities.ValidateCheckNullValue(this, nameof(litDefaultMaterial), litDefaultMaterial);
         HelperUtilities.ValidateCheckNullValue(this, nameof(dimmedMaterial), dimmedMaterial);
         HelperUtilities.ValidateCheckNullValue(this, nameof(variableLitShader), variableLitShader);
+        HelperUtilities.ValidateCheckNullValue(this, nameof(ammoIconPrefab), ammoIconPrefab);
+        HelperUtilities.ValidateCheckNullValue(this, nameof(doorOpenCloseSoundEffect), doorOpenCloseSoundEffect);
     }
 
 #endif
