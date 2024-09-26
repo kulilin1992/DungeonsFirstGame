@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbb1a41c6ef648144bb09706f1c0eb12, type: 3}
+  m_Name: EnemyDetails_Grimonk_Brown
+  m_EditorClassIdentifier: 
+  enemyName: Grimonk Brown
+  enemyPrefab: {fileID: 8245256001844165319, guid: 9d6295f0b5ff795498001f19a21d6178, type: 3}

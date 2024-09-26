@@ -27,6 +27,8 @@ public class WeaponDetailsSO : ScriptableObject
     public SoundEffectSO weaponFiringSoundEffect;
     public SoundEffectSO weaponReloadingSoundEffect;
 
+    public WeaponShootEffectSO weaponShootEffect;
+
     #region Validation
 
 #if UNITY_EDITOR

@@ -41,4 +41,8 @@ public static class Settings
 
     //ui
     public const float uiAmmoIconSpacing = 4f;
+
+    //Astar
+    public const int defaultAStarMovementPenalty = 40;
+    public const int preferredPathAStarMovementPenalty = 1;
 }

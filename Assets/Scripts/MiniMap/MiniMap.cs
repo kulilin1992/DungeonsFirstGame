@@ -7,6 +7,19 @@ public class MiniMap : MonoBehaviour
     [SerializeField] private GameObject miniMapPlayer;
     private Transform playerTransform;
 
+    #region Validation
+
+#if UNITY_EDITOR
+
+    // Validate SO fields
+    private void OnValidate()
+    {
+        HelperUtilities.ValidateCheckNullValue(this, nameof(miniMapPlayer), miniMapPlayer);
+    }
+
+#endif
+
+    #endregion Validation
     private void Start()
     {
         playerTransform = GameManager.Instance.GetPlayer().transform;
@@ -28,4 +41,5 @@ public class MiniMap : MonoBehaviour
             miniMapPlayer.transform.position = playerTransform.position;
         }
     }
+
 }

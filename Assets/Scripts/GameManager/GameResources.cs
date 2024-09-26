@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Tilemaps;
 
 public class GameResources : MonoBehaviour
 {
@@ -60,6 +61,9 @@ public class GameResources : MonoBehaviour
 
     public SoundEffectSO doorOpenCloseSoundEffect;
 
+    public TileBase[] enemyUnwalkableCollisionTilesArray;
+    public TileBase preferedEnemyPathTile;
+
     #region Validation
 
 #if UNITY_EDITOR
@@ -74,6 +78,9 @@ public class GameResources : MonoBehaviour
         HelperUtilities.ValidateCheckNullValue(this, nameof(variableLitShader), variableLitShader);
         HelperUtilities.ValidateCheckNullValue(this, nameof(ammoIconPrefab), ammoIconPrefab);
         HelperUtilities.ValidateCheckNullValue(this, nameof(doorOpenCloseSoundEffect), doorOpenCloseSoundEffect);
+
+        HelperUtilities.ValidateCheckEnumerableValues(this,nameof(enemyUnwalkableCollisionTilesArray), enemyUnwalkableCollisionTilesArray);
+        HelperUtilities.ValidateCheckNullValue(this,nameof(preferedEnemyPathTile), preferedEnemyPathTile);
     }
 
 #endif

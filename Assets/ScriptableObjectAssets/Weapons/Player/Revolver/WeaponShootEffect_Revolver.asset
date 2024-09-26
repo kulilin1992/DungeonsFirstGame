@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a744dcd9727f549a6678d6c2ddeb56, type: 3}
+  m_Name: WeaponShootEffect_Revolver
+  m_EditorClassIdentifier: 
+  colorGradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 0.109803915, b: 0.15570958, a: 1}
+    key1: {r: 0.86861825, g: 0.8962264, b: 0.114142045, a: 0.92941177}
+    key2: {r: 1, g: 1, b: 1, a: 0.6901961}
+    key3: {r: 0.21764861, g: 0.602877, b: 0.6886792, a: 0}
+    key4: {r: 0.31132078, g: 0.30104133, b: 0.30104133, a: 0}
+    key5: {r: 1, g: 1, b: 1, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 386
+    ctime1: 9252
+    ctime2: 14842
+    ctime3: 21588
+    ctime4: 47417
+    ctime5: 65535
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 47995
+    atime2: 65535
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 6
+    m_NumAlphaKeys: 3
+  duration: 0.5
+  startParticleSize: 0.2
+  startParticleSpeed: 0.4
+  startLifeTime: 1.5
+  maxParticleNumber: 100
+  emissionRate: 100
+  burstParticleNumber: 30
+  effectGravity: -0.03
+  sprite: {fileID: 21300000, guid: ecf6e010769abce4cb1e7c60e0f3b3d8, type: 3}
+  velocityOverLifeTimeMin: {x: 0, y: 0, z: 0}
+  velocityOverLifeTimeMax: {x: 0, y: 0, z: 0}
+  weaponShootEffectPrefab: {fileID: 4564391015058567230, guid: e848328f40b05cc4b8434286b49121a9, type: 3}

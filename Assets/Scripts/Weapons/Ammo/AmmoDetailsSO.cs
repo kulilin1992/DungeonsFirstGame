@@ -39,6 +39,8 @@ public class AmmoDetailsSO : ScriptableObject
     [Range(0f, 1f)] public float ammoTrailStartWidth;
     [Range(0f, 1f)] public float ammoTrailEndWidth;
 
+    public AmmoHitEffectSO ammoHitEffect;
+
         #region Validation
 
 #if UNITY_EDITOR

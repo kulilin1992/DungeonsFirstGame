@@ -58,7 +58,21 @@ public class Ammo : MonoBehaviour, IFireable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        DisplayAmmoHitEffect();
         DisableAmmo();
+    }
+
+    private void DisplayAmmoHitEffect()
+    {
+        if (ammoDetails.ammoHitEffect != null && ammoDetails.ammoHitEffect.ammoHitEffectPrefab != null)
+        {
+            AmmoHitEffect ammoHitEffect = (AmmoHitEffect) PoolManager.Instance.ReuseComponent
+                (ammoDetails.ammoHitEffect.ammoHitEffectPrefab, transform.position, Quaternion.identity);
+
+            ammoHitEffect.SetHitEffect(ammoDetails.ammoHitEffect);    
+            
+            ammoHitEffect.gameObject.SetActive(true);
+        }
     }
 
     private void DisableAmmo()

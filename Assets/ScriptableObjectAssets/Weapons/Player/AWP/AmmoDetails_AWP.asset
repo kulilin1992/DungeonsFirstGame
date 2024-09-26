@@ -36,3 +36,4 @@ MonoBehaviour:
   ammoTrailMaterial: {fileID: 0}
   ammoTrailStartWidth: 0
   ammoTrailEndWidth: 0
+  ammoHitEffect: {fileID: 11400000, guid: c230a30d9a82ad844b13f1f43aa3e28f, type: 2}
