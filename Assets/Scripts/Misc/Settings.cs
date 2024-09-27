@@ -25,12 +25,16 @@ public static class Settings
     public static int rollDown = Animator.StringToHash("rollDown");
 
     public static float baseSpeedForPlayerAnimations = 8f;
+
+    public static float baseSpeedForEnemyAnimations = 3f;
     #endregion
 
     //door
     public const float pixelPerUnit = 16f;
     public const float tileSizePixel = 16f;
     public static int open = Animator.StringToHash("open");
+
+    public const float doorUnlockDelay = 1f;
 
     //gameobject tags
     public const string playerTag = "Player";
@@ -41,8 +45,16 @@ public static class Settings
 
     //ui
     public const float uiAmmoIconSpacing = 4f;
+    public const float uiHeartSpacing = 16f;
 
     //Astar
     public const int defaultAStarMovementPenalty = 40;
     public const int preferredPathAStarMovementPenalty = 1;
+    public const float playerMoveDistanceToRebuildPath = 3f;
+    public const float enemyPathRebuildCooldown = 2f;
+
+    public const int targetFrameRateToSpreadPathFindingOver = 60;
+
+    //enemy parameters
+    public const int defaultEnemyHealth = 20;
 }

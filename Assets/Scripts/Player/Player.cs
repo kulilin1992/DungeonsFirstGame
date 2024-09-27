@@ -45,7 +45,15 @@ using UnityEngine.Rendering;
 public class Player : MonoBehaviour
 {
    [HideInInspector] public PlayerDetailsSO playerDetails;
+
+   //health
    [HideInInspector] public Health health;
+   [HideInInspector] public HealthEvent healthEvent;
+   [HideInInspector] public DestoryedEvent destoryedEvent;
+
+
+
+
    [HideInInspector] public SpriteRenderer spriteRenderer;
    [HideInInspector] public Animator animator;
 
@@ -67,6 +75,7 @@ public class Player : MonoBehaviour
 
    [HideInInspector] public ReloadWeaponEvent reloadWeaponEvent;
    [HideInInspector] public WeaponReloadEvent weaponReloadEvent;
+   [HideInInspector] public PlayerController playerController;
   
    
    public List<Weapon> weaponList = new List<Weapon>();
@@ -92,6 +101,12 @@ public class Player : MonoBehaviour
 
         reloadWeaponEvent = GetComponent<ReloadWeaponEvent>();
         weaponReloadEvent = GetComponent<WeaponReloadEvent>();
+
+        //health
+        healthEvent = GetComponent<HealthEvent>();
+        destoryedEvent = GetComponent<DestoryedEvent>();
+
+        playerController = GetComponent<PlayerController>();
    }
 
    public void Initialize(PlayerDetailsSO playerDetails)
@@ -101,7 +116,27 @@ public class Player : MonoBehaviour
 
         CreatePlayerStartingWeapons();
    }
-   public void SetPlayerHealth()
+
+   private void OnEnable()
+   {
+        healthEvent.OnHealthEvent += OnPlayerHealthChanged;
+   }
+
+   private void OnDisable()
+   {
+        healthEvent.OnHealthEvent -= OnPlayerHealthChanged;
+   }
+
+    private void OnPlayerHealthChanged(HealthEvent healthEvent, HealthEventArgs args)
+    {
+        Debug.Log("Health Amount: " + args.healthAmount);
+
+        if (args.healthAmount <= 0f) {
+            destoryedEvent.CallDestoryedEvent(true);
+        }
+    }
+
+    public void SetPlayerHealth()
    {
         health.SetStartingHealth(playerDetails.playerHealthAmount);
    }
@@ -132,5 +167,10 @@ public class Player : MonoBehaviour
         setActiveWeaponEvent.CallSetActiveWeaponEvent(weapon);
 
         return weapon;
+    }
+
+    public Vector3 GetPlayerPosition()
+    {
+        return transform.position;
     }
 }

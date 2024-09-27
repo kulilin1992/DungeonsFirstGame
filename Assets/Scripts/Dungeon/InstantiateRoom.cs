@@ -230,7 +230,7 @@ public class InstantiateRoom : MonoBehaviour
         //loop through all the grid squares
         for (int x = 0; x < (room.templateUpperBounds.x - room.templateLowerBounds.x + 1); x++) 
         {
-            for (int y = 0; y < (room.templateUpperBounds.y + room.templateLowerBounds.y + 1); y++)
+            for (int y = 0; y < (room.templateUpperBounds.y - room.templateLowerBounds.y + 1); y++)
             {
                 aStarMovementPenalty[x,y] = Settings.defaultAStarMovementPenalty;
 
@@ -245,10 +245,55 @@ public class InstantiateRoom : MonoBehaviour
 
                 //add preferred paths for enemies(1 is the preffered path value, default value
                 //for a grid location is specified int the settings
+                
+
                 if (tile == GameResources.Instance.preferedEnemyPathTile) {
                     aStarMovementPenalty[x,y] = Settings.preferredPathAStarMovementPenalty;
                 }
             }
         }
     }
+
+    public void LockDoors()
+    {
+        Door[] doors = GetComponentsInChildren<Door>();
+
+        foreach (Door door in doors)
+        {
+            door.LockDoor();
+        }
+        DisableRoomCollider();
+    }
+
+    public void UnlockDoors(float doorUnlockDelay)
+    {
+        StartCoroutine(UnlockDoorsRoutine(doorUnlockDelay));
+    }
+
+    private IEnumerator UnlockDoorsRoutine(float doorUnlockDelay)
+    {
+        if (doorUnlockDelay > 0) {
+            yield return new WaitForSeconds(doorUnlockDelay);
+        }
+
+        Door[] doors = GetComponentsInChildren<Door>();
+
+        foreach (Door door in doors)
+        {
+            door.UnlockDoor();
+        }
+        EnableRoomCollider();
+    }
+
+    private void DisableRoomCollider()
+    {
+        boxCollider2D.enabled = false;
+    }
+
+    private void EnableRoomCollider()
+    {
+        boxCollider2D.enabled = true;
+    }
+
+
 }

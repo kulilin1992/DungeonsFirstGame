@@ -55,6 +55,7 @@ public class GameResources : MonoBehaviour
     [Tooltip("populate with ammo icon prefab")]
     #endregion Tooltip
     public GameObject ammoIconPrefab;
+    public GameObject heartPrefab;
 
     //sound
     public AudioMixerGroup soundMasterMixerGroup;

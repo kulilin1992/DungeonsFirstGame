@@ -23,9 +23,36 @@ public class Room
     public bool isClearedOfEnemies = false;
     public bool isPreviouslyVisited = false;
 
+    //enemy born
+    public List<SpawnableObjectByLevel<EnemyDetailsSO>> enemiesByLevelList;
+    public List<RoomEnemySpawnParamater> roomLevelEnemySpawnParamatersList;
+
     public Room()
     {
         childRoomIdList = new List<string>();
         doorWayList = new List<Doorway>();
+    }
+
+    public int GetNumberOfEnemiesToSpawn(DungeonLevelSO dungeonLevel)
+    {
+        foreach (RoomEnemySpawnParamater roomEnemySpawnParamater in roomLevelEnemySpawnParamatersList)
+        {
+            if (roomEnemySpawnParamater.dungeonLevel == dungeonLevel) {
+                return Random.Range(roomEnemySpawnParamater.minTotalEnemiesToSpawn, roomEnemySpawnParamater.maxTotalEnemiesToSpawn);
+            }
+        }
+        return 0;
+    }
+
+    public RoomEnemySpawnParamater GetRoomEnemySpawnParamater(DungeonLevelSO dungeonLevel)
+    {
+        foreach (RoomEnemySpawnParamater roomEnemySpawnParamater in roomLevelEnemySpawnParamatersList)
+        {
+            if (roomEnemySpawnParamater.dungeonLevel == dungeonLevel)
+            {
+                return roomEnemySpawnParamater;
+            }
+        }
+        return null;
     }
 }

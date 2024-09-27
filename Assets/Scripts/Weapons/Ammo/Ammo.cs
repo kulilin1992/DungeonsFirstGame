@@ -15,6 +15,8 @@ public class Ammo : MonoBehaviour, IFireable
     private bool isAmmoMaterialSet = false;
     private bool overrideAmmoMovement;
 
+    private bool isColliding = false;
+
     #region Validation
 
 #if UNITY_EDITOR
@@ -58,8 +60,23 @@ public class Ammo : MonoBehaviour, IFireable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
+        if (isColliding) return;
+
+        DealDamage(collision);
+
         DisplayAmmoHitEffect();
         DisableAmmo();
+    }
+
+    private void DealDamage(Collider2D collision)
+    {
+        Health health = collision.GetComponent<Health>();
+        if (health != null)
+        {
+            isColliding = true;
+            health.TakeDamage(ammoDetails.ammoDamage);
+        }
     }
 
     private void DisplayAmmoHitEffect()
@@ -89,6 +106,7 @@ public class Ammo : MonoBehaviour, IFireable
     {
         //ammo
         this.ammoDetails = ammoDetails;
+        isColliding = false;
         SetFireDirection(ammoDetails, aimAngle, weaponAimAngle, weaponAimDirectionVector);
         spriteRenderer.sprite = ammoDetails.ammoIcon;
 

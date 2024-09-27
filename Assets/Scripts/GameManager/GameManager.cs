@@ -30,6 +30,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     [SerializeField] private int currentDungeonLevelListIndex = 0;
     [HideInInspector] public GameState gameState;
+    [HideInInspector] public GameState previousGameState;
 
     private Room currentRoom;
     private Room previousRoom;
@@ -48,6 +49,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     private void Start()
     {
         gameState = GameState.gameStarted;
+        previousGameState = GameState.gameStarted;
     }
 
     // Update is called once per frame
@@ -269,5 +271,10 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     public Sprite GetPlayerMiniMapIcon()
     {
         return playerDetails.playerMiniMapIcon;
+    }
+
+    public DungeonLevelSO GetCurrentDungeonLevel()
+    {
+        return dungeonLevelList[currentDungeonLevelListIndex];
     }
 }

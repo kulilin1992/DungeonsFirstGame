@@ -14,3 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Slizzard
   enemyPrefab: {fileID: 4334217591868961486, guid: e44d6ad4068cdfb45a343d1f998078eb, type: 3}
+  chaseDistance: 50
+  enemyStandardMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  enemyMaterializeTime: 2
+  enemyMaterializeShader: {fileID: -6465566751694194690, guid: 5fec8f8e6ea244648a3c6ede24a56288, type: 3}
+  enemyMaterializeColor: {r: 8.47419, g: 0.038766358, b: 6.122713, a: 1}
+  enemyWeapon: {fileID: 0}
+  firingIntervalMin: 0.1
+  firingIntervalMax: 1
+  firingDurationMin: 1
+  firingDurationMax: 2
+  firingLineOfSightRequired: 0
+  enemyHealthDetailsArray:
+  - dungeonLevel: {fileID: 11400000, guid: 406a9d6e679422e4f9acee73a6be81cf, type: 2}
+    enemyHealthAmount: 40
+  - dungeonLevel: {fileID: 11400000, guid: 9358743b86bd4ab4dbd9ebdb2125a754, type: 2}
+    enemyHealthAmount: 60
+  isImmuneAfterHit: 0
+  hitImmunityTime: 0

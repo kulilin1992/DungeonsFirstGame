@@ -92,6 +92,10 @@ PrefabInstance:
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[8].y
       value: 1.0878223
       objectReference: {fileID: 0}
+    - target: {fileID: -2269026252177267167, guid: 789282c7c930b4b48ac54a7ac062c829, type: 3}
+      propertyPath: enemyDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: f9402a71c36c69f40a11b045308cb000, type: 2}
     - target: {fileID: -2151600437678010901, guid: 789282c7c930b4b48ac54a7ac062c829, type: 3}
       propertyPath: m_Sprite
       value: 

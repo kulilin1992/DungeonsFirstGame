@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     private Coroutine playerRollCoroutine;
     private WaitForFixedUpdate waitForFixedUpdate;
-    private bool isPlayerRolling = false;
+    [HideInInspector] public bool isPlayerRolling = false;
     private float playerRollCooldownTimer = 0f;
 
     private int currentWeaponIndex = 1;
