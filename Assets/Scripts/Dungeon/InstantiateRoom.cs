@@ -18,13 +18,26 @@ public class InstantiateRoom : MonoBehaviour
     [HideInInspector] public Tilemap minimapTilemap;
     [HideInInspector] public Bounds roomColliderBounds;
 
+
+    //astar
     [HideInInspector] public int[,] aStarMovementPenalty;
+    [HideInInspector] public int[,] aStarItemObstacles;
 
     private BoxCollider2D boxCollider2D;
+
+    //enviroment
+    [SerializeField] private GameObject enviromentGameObject;
+
+    //moveItem
+    [HideInInspector] public List<MoveItem> moveableItemsList = new List<MoveItem>();
 
     private void Awake() {
         boxCollider2D = GetComponent<BoxCollider2D>();
         roomColliderBounds = boxCollider2D.bounds;
+    }
+
+    private void Start() {
+        //UpdateMoveableObstacles();
     }
 
     private void OnTriggerEnter2D(Collider2D collision){
@@ -39,6 +52,8 @@ public class InstantiateRoom : MonoBehaviour
         BlockOffUnusedDoorWays();
 
         AddObstaclesAndPreferredPaths();
+
+        //CreateItemObstaclesArray();
 
         AddDoorsToRoom();
 
@@ -215,6 +230,9 @@ public class InstantiateRoom : MonoBehaviour
                     if (doorComponent != null) {
                         doorComponent.isBossRoomDoor = true;
                         doorComponent.LockDoor();
+
+                        GameObject skullIcon = Instantiate(GameResources.Instance.minimapSkullPrefab, gameObject.transform);
+                        skullIcon.transform.localPosition = door.transform.localPosition;
                     }
                 }
             }
@@ -295,5 +313,17 @@ public class InstantiateRoom : MonoBehaviour
         boxCollider2D.enabled = true;
     }
 
+    public void ActivateEnviromentGameObjects()
+    {
+        if (enviromentGameObject != null) {
+            enviromentGameObject.SetActive(true);
+        }
+    }
 
+    public void DeactivateEnviromentGameObjects()
+    {
+        if (enviromentGameObject != null) {
+            enviromentGameObject.SetActive(false);
+        }
+    }
 }

@@ -54,3 +54,7 @@ MonoBehaviour:
   spawnPositionArray:
   - {x: 4, y: 14}
   - {x: 7, y: 7}
+  enemiesByLevelList: []
+  roomEnemySpawnParamaterList: []
+  battleMusic: {fileID: 11400000, guid: 2c137264c9b202a459ab5b6d0a805dc0, type: 2}
+  ambientMusic: {fileID: 11400000, guid: 3883dc41ba45c2149ab2eac38022b345, type: 2}

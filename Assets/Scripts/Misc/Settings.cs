@@ -57,4 +57,19 @@ public static class Settings
 
     //enemy parameters
     public const int defaultEnemyHealth = 20;
+
+
+    //contact damage
+    public const float contactDamageCollisionResetDelay = 0.5f;
+
+    //enviroment item
+    public static int destory = Animator.StringToHash("destroy");
+    public static string stateDestoryed = "Destroyed";
+
+    //chest animator
+    public static int use = Animator.StringToHash("use");
+
+    //game music
+    public const float musicFadeInTime = 0.5f;
+    public const float musicFadeOutTime = 0.5f;
 }

@@ -30,3 +30,24 @@ public enum AimDirection
     Left,
     Right
 }
+
+public enum ChestSpawnEvent
+{
+    onRoomEntry,
+    onEnemiesDefeated
+}
+
+public enum ChestSpawnPosition
+{
+    atSpawnerPosition,
+    atPlayerPosition
+}
+
+public enum ChestState
+{
+    closed,
+    healthItem,
+    ammoItem,
+    weaponItem,
+    empty
+}

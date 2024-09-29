@@ -24,6 +24,7 @@ public class Health : MonoBehaviour
     private const float spriteFlashInterval = 0.2f;
     private WaitForSeconds WaitForSecondsSpriteFlashInterval = new WaitForSeconds(spriteFlashInterval);
 
+    [SerializeField] private HealthBar healthBar;
 
     private void Awake()
     {
@@ -51,6 +52,14 @@ public class Health : MonoBehaviour
                 spriteRenderer = enemy.spriteRendererArray[0];
             }
         }
+
+        //health bar display or not
+        if (enemy != null && enemy.enemyDetails.isHealthBarDisplayed == true && healthBar != null) {
+            healthBar.EnableHealthBar();
+        }
+        else if (healthBar != null) {
+            healthBar.DisableHealthBar();
+        }
     }
 
     private void CallHealthEvent(int damageAmount)
@@ -75,6 +84,11 @@ public class Health : MonoBehaviour
             CallHealthEvent(damageAmount);
 
             PostHitImmunity();
+
+            if (healthBar != null) {
+                Debug.Log("currentHealth:" + currentHealth + " , startingHealth: "+ startingHealth);
+                healthBar.SetHealthBarValue(((float)currentHealth / (float)startingHealth));
+            }
         }
 
         if (isDamageable && isRolling) {
@@ -90,6 +104,18 @@ public class Health : MonoBehaviour
     public int GetStartingHealth()
     {
         return startingHealth;
+    }
+
+    public void AddHealth(int healthPercent) {
+        int healthIncrease = Mathf.RoundToInt((startingHealth * healthPercent) / 100f);
+        int totalHealth = currentHealth + healthIncrease;
+        if (totalHealth > startingHealth) {
+            currentHealth = startingHealth;
+        }
+        else {
+            currentHealth = totalHealth;
+        }
+        CallHealthEvent(0);
     }
 
     private void PostHitImmunity()

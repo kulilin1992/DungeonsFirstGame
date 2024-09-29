@@ -233,6 +233,10 @@ public class DungeonBuilder : SingletonMonobehaviour<DungeonBuilder>
         room.enemiesByLevelList = roomTemplate.enemiesByLevelList;
         room.roomLevelEnemySpawnParamatersList = roomTemplate.roomEnemySpawnParamaterList;
 
+        //game music
+        room.battleMusic = roomTemplate.battleMusic;
+        room.ambientMusic = roomTemplate.ambientMusic;
+
         //Entrance
         if (roomNode.parentRoomNodeIDList.Count == 0) {
             room.parentRoomId = "";

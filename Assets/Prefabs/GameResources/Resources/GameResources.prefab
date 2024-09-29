@@ -57,3 +57,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 37e2c9e0227bfbc409cd632b9bd0c81f, type: 2}
   - {fileID: 11400000, guid: 98f177f8276c38b429705e6720c48672, type: 2}
   preferedEnemyPathTile: {fileID: 11400000, guid: 3ce5fb260af53d24887b55c3d50041e2, type: 2}
+  chestOpen: {fileID: 11400000, guid: d282a04028f7a8e46aa645de36fdc199, type: 2}
+  healthPickup: {fileID: 11400000, guid: 3e80c727ea9980f4faef55de19e216dc, type: 2}
+  weaponPickup: {fileID: 11400000, guid: 503c19942b10525409b573ab207d5abc, type: 2}
+  ammoPickup: {fileID: 11400000, guid: 70c477ea2717f8c4fa7d0954be53a02f, type: 2}
+  materializeShader: {fileID: -6465566751694194690, guid: 5fec8f8e6ea244648a3c6ede24a56288, type: 3}
+  chestItemPrefab: {fileID: 4639833775042728145, guid: 9bd2ca7bd36734840a0cf00e63249ecc, type: 3}
+  heartIcon: {fileID: 21300000, guid: 93356131eec0f44458223985928ac6e3, type: 3}
+  bulletIcon: {fileID: 21300000, guid: a2482871b46d396438236c07b6402283, type: 3}
+  minimapSkullPrefab: {fileID: 6005044491893140626, guid: 5ce62c9bf83280e4fbd51ebc16cb2570, type: 3}
+  musicMasterMixerGroup: {fileID: -7206380732494497733, guid: 2ac509b551addfb48950fbdc0d9cefb4, type: 2}
+  musicOnFullSnapshot: {fileID: 24500006, guid: 2ac509b551addfb48950fbdc0d9cefb4, type: 2}
+  musicLowSnapshot: {fileID: 8893122114324796974, guid: 2ac509b551addfb48950fbdc0d9cefb4, type: 2}
+  musicOffSnapshot: {fileID: -3084740370723268673, guid: 2ac509b551addfb48950fbdc0d9cefb4, type: 2}

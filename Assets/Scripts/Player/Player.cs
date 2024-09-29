@@ -132,7 +132,7 @@ public class Player : MonoBehaviour
         Debug.Log("Health Amount: " + args.healthAmount);
 
         if (args.healthAmount <= 0f) {
-            destoryedEvent.CallDestoryedEvent(true);
+            destoryedEvent.CallDestoryedEvent(true, 0);
         }
     }
 
@@ -149,7 +149,7 @@ public class Player : MonoBehaviour
         }
    }
 
-    private Weapon AddWeaponToPlayer(WeaponDetailsSO weaponDetails)
+    public Weapon AddWeaponToPlayer(WeaponDetailsSO weaponDetails)
     {
         Weapon weapon = new Weapon()
         {
@@ -172,5 +172,18 @@ public class Player : MonoBehaviour
     public Vector3 GetPlayerPosition()
     {
         return transform.position;
+    }
+
+    public bool IsWeaponHeldByPlayer(WeaponDetailsSO weaponDetails)
+    {
+        foreach (Weapon weapon in weaponList)
+        {
+            if (weapon.weaponDetails == weaponDetails)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

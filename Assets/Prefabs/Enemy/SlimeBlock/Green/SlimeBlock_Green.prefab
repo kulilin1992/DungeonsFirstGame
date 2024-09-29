@@ -83,7 +83,7 @@ PrefabInstance:
     - target: {fileID: 7308205684622035149, guid: 789282c7c930b4b48ac54a7ac062c829, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 248a7cd77ed020c4cb7119d96d4e2018, type: 2}
+      objectReference: {fileID: 9100000, guid: a0ee566a387dcf744a5564ef5baa059e, type: 2}
     - target: {fileID: 7978722968070675012, guid: 789282c7c930b4b48ac54a7ac062c829, type: 3}
       propertyPath: m_Name
       value: SlimeBlock_Green

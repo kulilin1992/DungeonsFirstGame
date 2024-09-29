@@ -143,9 +143,8 @@ public static class HelperUtilities
     }
 
     public static bool ValidateCheckPositiveRange(Object thisObject, string fieldNameMinimum, float valueToCheckMinimum,
-        string fieldNameMaximum, float valueToCheckMaximum, bool isZeroAllowed) {
-        
-
+        string fieldNameMaximum, float valueToCheckMaximum, bool isZeroAllowed)
+    {
         bool error = false;
         if (valueToCheckMinimum > valueToCheckMaximum) {
             Debug.Log(fieldNameMinimum + " must be less than " + fieldNameMaximum + " in object" + thisObject.name.ToString());
@@ -180,5 +179,15 @@ public static class HelperUtilities
     public static float LinearToDicibels(int linear) {
         float linearScaleRange = 20f;
         return Mathf.Log10((float)linear / linearScaleRange) * 20f;
+    }
+
+    //get the camera viewport lower and upper bounds
+    public static void CameraWorldPositionBounds(out Vector2Int cameraWorldPositionLowerBounds, out 
+    Vector2Int cameraWorldPositionUpperBounds, Camera camera) {
+        Vector3 worldPositionViewportBottomLeft = camera.ViewportToWorldPoint(new Vector3(0f, 0f, 0f));
+        Vector3 worldPositionViewportTopRight = camera.ViewportToWorldPoint(new Vector3(1f, 1f, 0f));
+
+        cameraWorldPositionLowerBounds = new Vector2Int((int)worldPositionViewportBottomLeft.x, (int)worldPositionViewportBottomLeft.y);
+        cameraWorldPositionUpperBounds = new Vector2Int((int)worldPositionViewportTopRight.x, (int)worldPositionViewportTopRight.y);
     }
 }

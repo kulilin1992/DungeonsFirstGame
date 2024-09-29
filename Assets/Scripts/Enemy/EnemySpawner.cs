@@ -28,6 +28,8 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
         currentEnemyCount = 0;
         currentRoom = roomChangedEventArgs.room;
 
+        MusicManager.Instance.PlayMusic(currentRoom.ambientMusic, 0.2f, 2f);
+
         if (currentRoom.roomNodeType.isCorridorEW || currentRoom.roomNodeType.isCorridorNS)
             return;
 
@@ -44,6 +46,8 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 
         enemyMaxConcurrentSpawnNumber = GetConcurrentEnemies();
 
+        MusicManager.Instance.PlayMusic(currentRoom.battleMusic, 0.2f, 0.5f);
+
         currentRoom.instantiateRoom.LockDoors();
 
         SpawnEnemies();
@@ -57,7 +61,12 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 
     private void SpawnEnemies()
     {
-        if (GameManager.Instance.gameState == GameState.playingLevel) {
+        if (GameManager.Instance.gameState == GameState.bossStage) {
+            GameManager.Instance.previousGameState = GameState.bossStage;
+            GameManager.Instance.gameState = GameState.engagingBoss;
+        }
+
+        else if (GameManager.Instance.gameState == GameState.playingLevel) {
             GameManager.Instance.previousGameState = GameState.playingLevel;
             GameManager.Instance.gameState = GameState.engagingEnemies;
         }
@@ -104,6 +113,8 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 
         currentEnemyCount--;
 
+        StaticEventHandler.CallPointsScoredEvent(destoryedEventArgs.points);
+
         if (currentEnemyCount <= 0 && enemiesSpawnedSoFar == enemiesToSpawn) {
             currentRoom.isClearedOfEnemies = true;
             
@@ -117,8 +128,15 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
                 GameManager.Instance.previousGameState = GameState.engagingBoss;
 
             }
+            //修复清完当前房间敌人后state状态还是engagingEnemies得问题
+            else if (GameManager.Instance.gameState == GameState.engagingEnemies) {
+                GameManager.Instance.gameState = GameState.playingLevel;
+                GameManager.Instance.previousGameState = GameState.engagingEnemies;
+            }
 
             currentRoom.instantiateRoom.UnlockDoors(Settings.doorUnlockDelay);
+
+            MusicManager.Instance.PlayMusic(currentRoom.ambientMusic, 0.2f, 2f);
 
             StaticEventHandler.CallRoomEnemiesDefeatedEvent(currentRoom);
         }

@@ -319,6 +319,8 @@ GameObject:
   - component: {fileID: 5574849980216838496}
   - component: {fileID: 8208019334989510870}
   - component: {fileID: -2694709491861163305}
+  - component: {fileID: -7839579727426120148}
+  - component: {fileID: -5976986286332390890}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -356,6 +358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDamageable: 1
+  enemy: {fileID: 0}
 --- !u!210 &6179363920541921929
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -605,6 +608,7 @@ MonoBehaviour:
   fireWeaponEvent: {fileID: 0}
   reloadWeaponEvent: {fileID: 0}
   weaponReloadEvent: {fileID: 0}
+  playerController: {fileID: 0}
 --- !u!114 &8369180644802138878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,6 +683,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementDetails: {fileID: 11400000, guid: 04c6326c511f3944dae2fd84784dcb4c, type: 2}
+  isPlayerRolling: 0
 --- !u!114 &-8188880169253412981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -863,6 +868,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4928486c3cfbd5e409555093aa91d7a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-7839579727426120148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4308223459924710246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0136305663951046b7a13e84ca9e415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contactDamageAmount: 10
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 131072
+--- !u!114 &-5976986286332390890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4308223459924710246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5c9c24175d4ab4c876718df173d513, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contactDamageAmount: 0
 --- !u!1 &4755714502489848164
 GameObject:
   m_ObjectHideFlags: 0

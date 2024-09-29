@@ -78,6 +78,11 @@ public class RoomTemplateSO : ScriptableObject
 
     public List<RoomEnemySpawnParamater> roomEnemySpawnParamaterList;
 
+    //game music
+    public MusicTrackSO battleMusic;
+    public MusicTrackSO ambientMusic;
+    //public MusicTrackSO bossMusic;
+
     /// <summary>
     /// Returns the list of Entrances for the room template
     /// </summary>

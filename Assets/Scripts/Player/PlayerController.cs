@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private int currentWeaponIndex = 1;
 
     private bool leftMouseDowmPreviousFrame = false;
+    private bool isPlayerMovementDisabled = false;
 
     #region Validation
 #if UNITY_EDITOR
@@ -46,6 +47,9 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+
+        if (isPlayerMovementDisabled) return;
+
         if (isPlayerRolling) return;
         MovementInput();
         WeaponInput();
@@ -268,4 +272,16 @@ public class PlayerController : MonoBehaviour
         currentWeaponIndex = 1;
         SetWeaponByIndex(currentWeaponIndex);
     }
+
+    public void EnablePlayer()
+    {
+        isPlayerMovementDisabled = false;
+    }
+
+    public void DisablePlayer()
+    {
+        isPlayerMovementDisabled = true;
+        player.idleEvent.CallIdleEvent();
+    }
+
 }

@@ -11,13 +11,18 @@ public class DestoryedEvent : MonoBehaviour
     // {
     //     OnDestroyed?.Invoke(this);
     // }
-    public void CallDestoryedEvent(bool playerDied)
+    // public void CallDestoryedEvent(bool playerDied)
+    // {
+    //     OnDestroyed?.Invoke(this, new DestoryedEventArgs { playerDied = playerDied });
+    // }
+    public void CallDestoryedEvent(bool playerDied, int points)
     {
-        OnDestroyed?.Invoke(this, new DestoryedEventArgs { playerDied = playerDied });
+        OnDestroyed?.Invoke(this, new DestoryedEventArgs { playerDied = playerDied, points = points });
     }
 }
 
 public class DestoryedEventArgs : EventArgs
 {
     public bool playerDied;
+    public int points;
 }

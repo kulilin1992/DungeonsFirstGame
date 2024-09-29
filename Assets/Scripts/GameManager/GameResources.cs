@@ -65,6 +65,28 @@ public class GameResources : MonoBehaviour
     public TileBase[] enemyUnwalkableCollisionTilesArray;
     public TileBase preferedEnemyPathTile;
 
+    //chest
+    public SoundEffectSO chestOpen;
+    public SoundEffectSO healthPickup;
+    public SoundEffectSO weaponPickup;
+    public SoundEffectSO ammoPickup;
+    public Shader materializeShader;
+    public GameObject chestItemPrefab;
+    public Sprite heartIcon;
+    public Sprite bulletIcon;
+
+    //minimap
+    public GameObject minimapSkullPrefab;
+
+
+    //game music
+    public AudioMixerGroup musicMasterMixerGroup;
+    public AudioMixerSnapshot musicOnFullSnapshot;
+    public AudioMixerSnapshot musicLowSnapshot;
+    public AudioMixerSnapshot musicOffSnapshot;
+
+
+
     #region Validation
 
 #if UNITY_EDITOR

@@ -27,6 +27,11 @@ public class Room
     public List<SpawnableObjectByLevel<EnemyDetailsSO>> enemiesByLevelList;
     public List<RoomEnemySpawnParamater> roomLevelEnemySpawnParamatersList;
 
+
+    //game music
+    public MusicTrackSO battleMusic;
+    public MusicTrackSO ambientMusic;
+
     public Room()
     {
         childRoomIdList = new List<string>();
