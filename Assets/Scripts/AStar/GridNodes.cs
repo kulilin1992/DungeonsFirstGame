@@ -32,7 +32,7 @@ public class GridNodes
         }
         else
         {
-            Debug.Log("Node out of bounds");
+            Debug.Log("Node out of bounds");    
             return null;
         }
     }

@@ -85,6 +85,19 @@ public class GameResources : MonoBehaviour
     public AudioMixerSnapshot musicLowSnapshot;
     public AudioMixerSnapshot musicOffSnapshot;
 
+    public MusicTrackSO mainMenuMusic;
+
+
+    //player selection
+    public GameObject playerSelectionPrefab;
+    public List<PlayerDetailsSO> playerDetailsList;
+
+    //score
+    public GameObject scorePrefab;
+
+    //table
+    public SoundEffectSO tableFlip;
+
 
 
     #region Validation

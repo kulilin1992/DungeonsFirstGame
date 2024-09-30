@@ -25,10 +25,10 @@ public class MusicManager : SingletonMonobehaviour<MusicManager>
     private void Start()
     {
         // Check if volume levels have been saved in playerprefs - if so retrieve and set them
-        // if (PlayerPrefs.HasKey("musicVolume"))
-        // {
-        //     musicVolume = PlayerPrefs.GetInt("musicVolume");
-        // }
+        if (PlayerPrefs.HasKey("musicVolume"))
+        {
+            musicVolume = PlayerPrefs.GetInt("musicVolume");
+        }
 
         SetMusicVolume(musicVolume);
     }

@@ -70,3 +70,11 @@ MonoBehaviour:
   musicOnFullSnapshot: {fileID: 24500006, guid: 2ac509b551addfb48950fbdc0d9cefb4, type: 2}
   musicLowSnapshot: {fileID: 8893122114324796974, guid: 2ac509b551addfb48950fbdc0d9cefb4, type: 2}
   musicOffSnapshot: {fileID: -3084740370723268673, guid: 2ac509b551addfb48950fbdc0d9cefb4, type: 2}
+  mainMenuMusic: {fileID: 11400000, guid: 908724b4867476949a18bb6c9bb550cc, type: 2}
+  playerSelectionPrefab: {fileID: 2945699679665448731, guid: fee1eb148310746419a2217d31e88e4f, type: 3}
+  playerDetailsList:
+  - {fileID: 11400000, guid: adbe54aaaee8ae74987e7f5a1a5707f9, type: 2}
+  - {fileID: 11400000, guid: deeaaa65a3f008a40998fec068327ec9, type: 2}
+  - {fileID: 11400000, guid: a4f90710320642c4d8d480a804673ac7, type: 2}
+  scorePrefab: {fileID: 2774666706921192287, guid: 7f4966ecc593f7344a286827750d84d6, type: 3}
+  tableFlip: {fileID: 11400000, guid: 9032b19fb409b3848abc244ada18c7b3, type: 2}

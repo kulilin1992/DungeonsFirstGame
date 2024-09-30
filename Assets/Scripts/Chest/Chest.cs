@@ -61,6 +61,7 @@ public class Chest : MonoBehaviour, IUseable
 
     public void UseItem()
     {
+        Debug.Log("Use Chest"); 
         if (!isEnabled) return;
         switch (chestState)
         {
@@ -71,10 +72,10 @@ public class Chest : MonoBehaviour, IUseable
                 CollectHealthItem();
                 break;
             case ChestState.weaponItem:
-                CollectAmmoItem();
+                CollectWeaponItem();
                 break;
             case ChestState.ammoItem:
-                CollectWeaponItem();
+                CollectAmmoItem();
                 break;
             case ChestState.empty:
                 return;
@@ -101,6 +102,8 @@ public class Chest : MonoBehaviour, IUseable
 
     private void UpdateChestState()
     {
+
+        Debug.Log("healthPercent:" + healthPercent + " weaponDetails:" + weaponDetails + " ammoPercent:" + ammoPercent);
         if (healthPercent != 0) {
             chestState = ChestState.healthItem;
             InstantiateHealthItem();
@@ -206,7 +209,7 @@ public class Chest : MonoBehaviour, IUseable
         messageMeshPro.text = "";
     }
 }
-public interface IUseable
-{
-    void UseItem();
-}
+// public interface IUseable
+// {
+//     void UseItem();
+// }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b129082b41e83241bb777db4c59a89e, type: 3}
   m_Name: WeaponDetails_PlasmaBlaster
   m_EditorClassIdentifier: 
-  weaponName: Plasma Blaster
+  weaponName: "\u6FC0\u5149\u624B\u67AA"
   weaponIcon: {fileID: 21300000, guid: a9d9372b640a67a4dae1cdbb59e3b919, type: 3}
   weaponShootPosition: {x: 1.245, y: 0.277, z: 0}
   weaponCurrentAmmo: {fileID: 11400000, guid: e5977404194280f4f8c60ff1255804b2, type: 2}

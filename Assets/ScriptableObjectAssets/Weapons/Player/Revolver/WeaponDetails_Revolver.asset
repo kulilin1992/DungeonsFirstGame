@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b129082b41e83241bb777db4c59a89e, type: 3}
   m_Name: WeaponDetails_Revolver
   m_EditorClassIdentifier: 
-  weaponName: Revolver
+  weaponName: "\u5DE6\u8F6E\u624B\u67AA"
   weaponIcon: {fileID: 21300000, guid: 29bc0107bc11191468ed7d175994fb5b, type: 3}
   weaponShootPosition: {x: 1.15, y: 0.329, z: 0}
   weaponCurrentAmmo: {fileID: 11400000, guid: cebfa55c48fdc864893f3bf8f53b26fe, type: 2}

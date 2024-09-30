@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1094207263807840281, guid: a12fb504c6e8afb4ca606a1b549f51be, type: 3}
       propertyPath: m_Name
-      value: ChestSpawner_RoomEntry
+      value: ChestSpawner_RoomEntry_ChestRoom
       objectReference: {fileID: 0}
     - target: {fileID: 1310805614227131240, guid: a12fb504c6e8afb4ca606a1b549f51be, type: 3}
       propertyPath: chestSpawnChanceMax
@@ -22,6 +22,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1310805614227131240, guid: a12fb504c6e8afb4ca606a1b549f51be, type: 3}
       propertyPath: numberOfItemsToSpawnMax
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1310805614227131240, guid: a12fb504c6e8afb4ca606a1b549f51be, type: 3}
+      propertyPath: numberOfItemsToSpawnMin
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1310805614227131240, guid: a12fb504c6e8afb4ca606a1b549f51be, type: 3}
@@ -55,15 +59,15 @@ PrefabInstance:
     - target: {fileID: 1310805614227131240, guid: a12fb504c6e8afb4ca606a1b549f51be, type: 3}
       propertyPath: ammoSpawnByLevelList.Array.data[0].dungeonLevel
       value: 
-      objectReference: {fileID: 11400000, guid: 9358743b86bd4ab4dbd9ebdb2125a754, type: 2}
+      objectReference: {fileID: 11400000, guid: 406a9d6e679422e4f9acee73a6be81cf, type: 2}
     - target: {fileID: 1310805614227131240, guid: a12fb504c6e8afb4ca606a1b549f51be, type: 3}
       propertyPath: healthSpawnByLevelList.Array.data[0].dungeonLevel
       value: 
-      objectReference: {fileID: 11400000, guid: 9358743b86bd4ab4dbd9ebdb2125a754, type: 2}
+      objectReference: {fileID: 11400000, guid: 406a9d6e679422e4f9acee73a6be81cf, type: 2}
     - target: {fileID: 1310805614227131240, guid: a12fb504c6e8afb4ca606a1b549f51be, type: 3}
       propertyPath: weaponSpawnByLevelList.Array.data[0].dungeonLevel
       value: 
-      objectReference: {fileID: 11400000, guid: 9358743b86bd4ab4dbd9ebdb2125a754, type: 2}
+      objectReference: {fileID: 11400000, guid: 406a9d6e679422e4f9acee73a6be81cf, type: 2}
     - target: {fileID: 1310805614227131240, guid: a12fb504c6e8afb4ca606a1b549f51be, type: 3}
       propertyPath: weaponSpawnByLevelList.Array.data[0].spawnableObjectRatioList.Array.size
       value: 1

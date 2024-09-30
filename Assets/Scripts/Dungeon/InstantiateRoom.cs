@@ -37,7 +37,7 @@ public class InstantiateRoom : MonoBehaviour
     }
 
     private void Start() {
-        //UpdateMoveableObstacles();
+        UpdateMoveableObstacles();
     }
 
     private void OnTriggerEnter2D(Collider2D collision){
@@ -53,7 +53,7 @@ public class InstantiateRoom : MonoBehaviour
 
         AddObstaclesAndPreferredPaths();
 
-        //CreateItemObstaclesArray();
+        CreateItemObstaclesArray();
 
         AddDoorsToRoom();
 
@@ -326,4 +326,66 @@ public class InstantiateRoom : MonoBehaviour
             enviromentGameObject.SetActive(false);
         }
     }
+
+    private void CreateItemObstaclesArray()
+    {
+        // this array will be populated during gameplay with any moveable obstacles
+        aStarItemObstacles = new int[room.templateUpperBounds.x - room.templateLowerBounds.x + 1, 
+            room.templateUpperBounds.y - room.templateLowerBounds.y + 1];
+    }
+
+    public void UpdateMoveableObstacles()
+    {
+        InitializeItemObstaclesArray();
+
+        foreach (MoveItem moveItem in moveableItemsList)
+        {
+            Vector3Int colliderBoundsMin = grid.WorldToCell(moveItem.boxCollider.bounds.min);
+            Vector3Int colliderBoundsMax = grid.WorldToCell(moveItem.boxCollider.bounds.max);
+
+            // Loop through and add moveable item collider bounds to obstacle array
+            for (int i = colliderBoundsMin.x; i <= colliderBoundsMax.x; i++)
+            {
+                for (int j = colliderBoundsMin.y; j <= colliderBoundsMax.y; j++)
+                {
+                    aStarItemObstacles[i - room.templateLowerBounds.x, j - room.templateLowerBounds.y] = 0;
+                }
+            }
+        }
+    }
+
+    private void InitializeItemObstaclesArray()
+    {
+        for (int x = 0; x < (room.templateUpperBounds.x - room.templateLowerBounds.x + 1); x++)
+        {
+            for (int y = 0; y < (room.templateUpperBounds.y - room.templateLowerBounds.y + 1); y++)
+            {
+                // Set default movement penalty for grid sqaures
+                aStarItemObstacles[x, y] = Settings.defaultAStarMovementPenalty;
+            }
+        }
+    }
+
+    ///// <summary>
+    ///// This is used for debugging - shows the position of the table obstacles. 
+    ///// (MUST BE COMMENTED OUT BEFORE UPDATING ROOM PREFABS)
+    ///// </summary>
+    // private void OnDrawGizmos()
+    // {
+
+    //    for (int i = 0; i < (room.templateUpperBounds.x - room.templateLowerBounds.x + 1); i++)
+    //    {
+    //        for (int j = 0; j < (room.templateUpperBounds.y - room.templateLowerBounds.y + 1); j++)
+    //        {
+    //            if (aStarItemObstacles[i, j] == 0)
+    //            {
+    //                Vector3 worldCellPos = grid.CellToWorld(new Vector3Int(i + room.templateLowerBounds.x, j + room.templateLowerBounds.y, 0));
+
+    //                Gizmos.DrawWireCube(new Vector3(worldCellPos.x + 0.5f, worldCellPos.y + 0.5f, 0), Vector3.one);
+    //            }
+    //        }
+    //    }
+
+    // }
+
 }

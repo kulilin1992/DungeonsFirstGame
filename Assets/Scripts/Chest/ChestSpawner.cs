@@ -95,10 +95,14 @@ public class ChestSpawner : MonoBehaviour
     /// </summary>
     private void StaticEventHandler_OnRoomChanged(RoomChangedEventArgs roomChangedEventArgs)
     {
+        Debug.Log("awwwwwwwwww");
         // Get the room the chest is in if we don't already have it
         if (chestRoom == null)
         {
             chestRoom = GetComponentInParent<InstantiateRoom>().room;
+        }
+        if (chestRoom != roomChangedEventArgs.room) {
+            Debug.Log("lalalalalal");
         }
 
         // If the chest is spawned on room entry then spawn chest
@@ -160,6 +164,7 @@ public class ChestSpawner : MonoBehaviour
             chestGameObject.transform.position = spawnPosition + variation;
         }
 
+        Debug.Log("adddsasdasdasdasdasd");
         // Get Chest component
         Chest chest = chestGameObject.GetComponent<Chest>();
 
@@ -218,6 +223,8 @@ public class ChestSpawner : MonoBehaviour
         int numberOfItemsToSpawn = Random.Range(numberOfItemsToSpawnMin, numberOfItemsToSpawnMax + 1);
 
         int choice;
+
+        Debug.Log("Number of items to spawn: " + numberOfItemsToSpawn);
 
         if (numberOfItemsToSpawn == 1)
         {

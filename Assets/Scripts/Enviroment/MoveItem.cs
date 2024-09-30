@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class MoveItem : MonoBehaviour
 {
-    [SerializeField] private SoundEffectSO soundEffect;
+    [SerializeField] private SoundEffectSO moveSoundEffect;
 
     [HideInInspector] public BoxCollider2D boxCollider;
     private Rigidbody2D rb;
@@ -31,15 +31,15 @@ public class MoveItem : MonoBehaviour
     {
         ConfineItemToRoomBounds();
 
-        //instantiateRoom.UpdateMoveableObstacles();
+        instantiateRoom.UpdateMoveableObstacles();
 
         previousPosition = transform.position;
 
         if (Mathf.Abs(rb.velocity.x) > 0.001f || Mathf.Abs(rb.velocity.y) > 0.001f)
         {
-            if (soundEffect != null && Time.frameCount % 10 == 0)
+            if (moveSoundEffect != null && Time.frameCount % 10 == 0)
             {
-                SoundEffectManager.Instance.PlaySoundEffect(soundEffect);
+                SoundEffectManager.Instance.PlaySoundEffect(moveSoundEffect);
             } 
         }
     }

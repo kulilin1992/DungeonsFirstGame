@@ -49,6 +49,9 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     [SerializeField] private TextMeshProUGUI messageTextTMP;
     [SerializeField] private CanvasGroup canvasGroup;
 
+    //pause menu
+    [SerializeField] private GameObject pauseMenu;
+
 
     //dungeon map
     private bool isFading = false;
@@ -187,7 +190,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     private void HandleGameState()
     {
-        Debug.Log("HandleGameState: " + gameState);
+        //Debug.Log("HandleGameState: " + gameState);
         // Handle game state
         switch (gameState)
         {
@@ -206,10 +209,10 @@ public class GameManager : SingletonMonobehaviour<GameManager>
             //While playing the level handle the tab key for the dungeon overview map.
             case GameState.playingLevel:
 
-                // if (Input.GetKeyDown(KeyCode.Escape))
-                // {
-                //     PauseGameMenu();
-                // }
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    PauseGameMenu();
+                }
 
                 if (Input.GetKeyDown(KeyCode.Tab))
                 {
@@ -218,15 +221,15 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
                 break;
 
-            // // While engaging enemies handle the escape key for the pause menu
-            // case GameState.engagingEnemies:
+            // While engaging enemies handle the escape key for the pause menu
+            case GameState.engagingEnemies:
 
-            //     if (Input.GetKeyDown(KeyCode.Escape))
-            //     {
-            //         PauseGameMenu();
-            //     }
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    PauseGameMenu();
+                }
 
-            //     break;
+                break;
 
 
              // if in the dungeon overview map handle the release of the tab key to clear the map
@@ -244,10 +247,10 @@ public class GameManager : SingletonMonobehaviour<GameManager>
             // While playing the level and before the boss is engaged, handle the tab key for the dungeon overview map.
             case GameState.bossStage:
 
-                // if (Input.GetKeyDown(KeyCode.Escape))
-                // {
-                //     PauseGameMenu();
-                // }
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    PauseGameMenu();
+                }
 
                 if (Input.GetKeyDown(KeyCode.Tab))
                 {
@@ -256,15 +259,15 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
                 break;
 
-            // // While engaging the boss handle the escape key for the pause menu
-            // case GameState.engagingBoss:
+            // While engaging the boss handle the escape key for the pause menu
+            case GameState.engagingBoss:
 
-            //     if (Input.GetKeyDown(KeyCode.Escape))
-            //     {
-            //         PauseGameMenu();
-            //     }
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    PauseGameMenu();
+                }
 
-            //     break;
+                break;
 
             // handle the level being completed
             case GameState.levelCompleted:
@@ -300,13 +303,13 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
                 break;
 
-            // // if the game is paused and the pause menu showing, then pressing escape again will clear the pause menu
-            // case GameState.gamePaused:
-            //     if (Input.GetKeyDown(KeyCode.Escape))
-            //     {
-            //         PauseGameMenu();
-            //     }
-            //     break;
+            // if the game is paused and the pause menu showing, then pressing escape again will clear the pause menu
+            case GameState.gamePaused:
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    PauseGameMenu();
+                }
+                break;
         }
     }
      private void PlayDungeonLevel(int dungeonLevelListIndex)
@@ -403,8 +406,10 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         yield return StartCoroutine(Fade(0f, 1f, 2f, new Color(0f, 0f, 0f, 0.4f)));
 
         //display boss message
-        yield return StartCoroutine(DisplayMessageRoutine("WELL DONE " + GameResources.Instance.currentPlayer.playerName + 
-        "! YOU'VE SURVIVED ....SO FAR\n\nNOW FIND AND DEFEAT THE BOSS....GOOD LUCK!", Color.white, 5f));
+        // yield return StartCoroutine(DisplayMessageRoutine("WELL DONE " + GameResources.Instance.currentPlayer.playerName + 
+        // "! YOU'VE SURVIVED ....SO FAR\n\nNOW FIND AND DEFEAT THE BOSS....GOOD LUCK!", Color.white, 5f));
+        yield return StartCoroutine(DisplayMessageRoutine("打得不错 " + GameResources.Instance.currentPlayer.playerName + 
+        "! 你活下来了......到目前为止\n\n现在出发去击败BOSS吧......祝你好运!", Color.white, 5f));
 
         //fade out
         yield return StartCoroutine(Fade(1f, 0f, 2f, new Color(0f, 0f, 0f, 0.4f)));
@@ -419,11 +424,14 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         yield return StartCoroutine(Fade(0f, 1f, 2f, new Color(0f, 0f, 0f, 0.4f)));
 
         //display level completed
-        yield return StartCoroutine(DisplayMessageRoutine("WELL DONE " + GameResources.Instance.currentPlayer.playerName + 
-        "! YOU'VE SURVIVED THIS DUNGEON LEVEL", Color.white, 5f));
+        // yield return StartCoroutine(DisplayMessageRoutine("WELL DONE " + GameResources.Instance.currentPlayer.playerName + 
+        // "! YOU'VE SURVIVED THIS DUNGEON LEVEL", Color.white, 5f));
+        yield return StartCoroutine(DisplayMessageRoutine("打的不错 " + GameResources.Instance.currentPlayer.playerName + 
+        "! 你已经通过了这个地牢关卡", Color.white, 5f));
+        
 
-        yield return StartCoroutine(DisplayMessageRoutine("COLLECT ANY LOOT...THEN PRESS RETURN\n\nTO DESCEND FURTHER INTO THE DUNGEON", Color.white, 5f));
-
+        //yield return StartCoroutine(DisplayMessageRoutine("COLLECT ANY LOOT...THEN PRESS RETURN\n\nTO DESCEND FURTHER INTO THE DUNGEON", Color.white, 3f));
+        yield return StartCoroutine(DisplayMessageRoutine("收集战利品...然后按回车键\n\n继续深入地牢", Color.white, 3f));
         //fade out
         yield return StartCoroutine(Fade(1f, 0f, 2f, new Color(0f, 0f, 0f, 0.4f)));
 
@@ -443,15 +451,43 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
         GetPlayer().playerController.DisablePlayer();
 
+        int rank = HighScoreManager.Instance.GetRank(gameScore);
+
+        string rankText;
+
+        if (rank > 0 && rank < Settings.numberOfHighScoresToSave) {
+            //rankText = "YOUR SCORE ARE RANKED #" + rank.ToString("#0") + " IN THE TOP" + Settings.numberOfHighScoresToSave.ToString("#0");
+            rankText = "你获得的分数 #" + rank.ToString("#0") + " 在TOP排行榜中" + Settings.numberOfHighScoresToSave.ToString("#0");
+            string name = GameResources.Instance.currentPlayer.playerName;
+
+            if (name == "") {
+                name = playerDetails.playerCharacterName.ToUpper();
+            }
+
+            HighScoreManager.Instance.AddScore(new Score() {playerName = name, levelDescription = "LEVEL " + (currentDungeonLevelListIndex + 1).ToString()
+                + " - " + GetCurrentDungeonLevel().levelName.ToUpper(), playerScore = gameScore}, rank);
+        }
+        else
+        {
+            //rankText = "YOUR SCORE ARE NOT RANKED IN THE TOP" + Settings.numberOfHighScoresToSave.ToString("#0");
+            rankText = "你获得的分数没有进入TOP排行榜中" + Settings.numberOfHighScoresToSave.ToString("#0");
+        }
+        yield return new WaitForSeconds(1f);
+
         //fade out
         yield return StartCoroutine(Fade(0f, 1f, 2f, Color.black));
 
         //display game won
-        yield return StartCoroutine(DisplayMessageRoutine("WELL DONE " + GameResources.Instance.currentPlayer.playerName + 
-        "! YOU'VE DEFEATED THE DUNGEON", Color.white, 3f));
+        // yield return StartCoroutine(DisplayMessageRoutine("WELL DONE " + GameResources.Instance.currentPlayer.playerName + 
+        // "! YOU'VE DEFEATED THE DUNGEON", Color.white, 3f));
+        yield return StartCoroutine(DisplayMessageRoutine("干的漂亮 " + GameResources.Instance.currentPlayer.playerName + 
+        "! 你已经通过所有的地牢", Color.white, 3f));
 
-        yield return StartCoroutine(DisplayMessageRoutine("YOUR SCORE " + gameScore.ToString("###,###0"), Color.white, 5f));
-        yield return StartCoroutine(DisplayMessageRoutine("PRESS RETURN TO RESTART THE GAME", Color.white, 0f));
+        //yield return StartCoroutine(DisplayMessageRoutine("YOUR SCORE " + gameScore.ToString("###,###0") + "\n\n" + rankText, Color.white, 4f));
+        yield return StartCoroutine(DisplayMessageRoutine("你的分数 " + gameScore.ToString("###,###0") + "\n\n" + rankText, Color.white, 4f));
+
+        //yield return StartCoroutine(DisplayMessageRoutine("PRESS RETURN TO RESTART THE GAME", Color.white, 0f));
+        yield return StartCoroutine(DisplayMessageRoutine("请按回车键重新开始游戏", Color.white, 0f));
 
 
         gameState = GameState.restartGame;
@@ -462,6 +498,29 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         previousGameState = GameState.gameLost;
 
         GetPlayer().playerController.DisablePlayer();
+
+        int rank = HighScoreManager.Instance.GetRank(gameScore);
+
+        string rankText;
+
+        if (rank > 0 && rank < Settings.numberOfHighScoresToSave) {
+            //rankText = "YOUR SCORE ARE RANKED #" + rank.ToString("#0") + " IN THE TOP" + Settings.numberOfHighScoresToSave.ToString("#0");
+            rankText = "你获得的分数 #" + rank.ToString("#0") + " 在TOP排行榜中" + Settings.numberOfHighScoresToSave.ToString("#0");
+
+            string name = GameResources.Instance.currentPlayer.playerName;
+
+            if (name == "") {
+                name = playerDetails.playerCharacterName.ToUpper();
+            }
+
+            HighScoreManager.Instance.AddScore(new Score() {playerName = name, levelDescription = "LEVEL " + (currentDungeonLevelListIndex + 1).ToString()
+                + " - " + GetCurrentDungeonLevel().levelName.ToUpper(), playerScore = gameScore}, rank);
+        }
+        else
+        {
+            //rankText = "YOUR SCORE ARE NOT RANKED IN THE TOP" + Settings.numberOfHighScoresToSave.ToString("#0");
+            rankText = "你获得的分数没有进入TOP排行榜中" + Settings.numberOfHighScoresToSave.ToString("#0");
+        }
 
         yield return new WaitForSeconds(1f);
 
@@ -474,18 +533,23 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         }
 
         //display game lost
-        yield return StartCoroutine(DisplayMessageRoutine("BAD LUCK " + GameResources.Instance.currentPlayer.playerName + 
-        "! YOU'VE SUCCUMBED TO THE DUNGEON", Color.white, 3f));
+        // yield return StartCoroutine(DisplayMessageRoutine("BAD LUCK " + GameResources.Instance.currentPlayer.playerName + 
+        // "! YOU'VE SUCCUMBED TO THE DUNGEON", Color.white, 3f));
+        yield return StartCoroutine(DisplayMessageRoutine("很遗憾 " + GameResources.Instance.currentPlayer.playerName + 
+        "! 你已经失败了", Color.white, 3f));
 
-        yield return StartCoroutine(DisplayMessageRoutine("YOUR SCORE " + gameScore.ToString("###,###0"), Color.white, 5f));
-        yield return StartCoroutine(DisplayMessageRoutine("PRESS RETURN TO RESTART THE GAME", Color.white, 0f));
+        //yield return StartCoroutine(DisplayMessageRoutine("YOUR SCORE " + gameScore.ToString("###,###0") + "\n\n" + rankText, Color.white, 4f));
+        yield return StartCoroutine(DisplayMessageRoutine("你的分数 " + gameScore.ToString("###,###0") + "\n\n" + rankText, Color.white, 4f));
+        
+        // yield return StartCoroutine(DisplayMessageRoutine("PRESS RETURN TO RESTART THE GAME", Color.white, 0f));
+        yield return StartCoroutine(DisplayMessageRoutine("请按回车键重新开始游戏", Color.white, 0f));
 
         gameState = GameState.restartGame;
     }
 
     private void RestartGame()
     {
-        SceneManager.LoadScene("MainGameScene");
+        SceneManager.LoadScene("MainMenuScene");
     }
 
     private IEnumerator DisplayDungeonLevelText()
@@ -534,5 +598,26 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         //     return;
         
         DungeonMap.Instance.DisplayDungeonOverViewMap();
+    }
+
+     void PauseGameMenu()
+    {
+        if (gameState != GameState.gamePaused) {
+
+            pauseMenu.SetActive(true);
+            GetPlayer().playerController.DisablePlayer();
+
+            previousGameState = gameState;
+            gameState = GameState.gamePaused;
+        }
+        else if (gameState == GameState.gamePaused) {
+
+            pauseMenu.SetActive(false);
+            GetPlayer().playerController.EnablePlayer();
+
+            gameState = previousGameState;
+            previousGameState = GameState.gamePaused;
+
+        }
     }
 }

@@ -72,4 +72,13 @@ public static class Settings
     //game music
     public const float musicFadeInTime = 0.5f;
     public const float musicFadeOutTime = 0.5f;
+
+    // high score
+    public const int numberOfHighScoresToSave = 100;
+
+    //flip table
+    public static int flipUp = Animator.StringToHash("flipUp");
+    public static int flipDown = Animator.StringToHash("flipDown");
+    public static int flipLeft = Animator.StringToHash("flipLeft");
+    public static int flipRight = Animator.StringToHash("flipRight");
 }
