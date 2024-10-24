@@ -79,10 +79,12 @@ public class PlayerController : MonoBehaviour
         if (horizontalInput != 0 && verticalInput != 0) {
             direction *= 0.7f; //diagonal movement
         }
-
+        
+        //Debug.Log("VirtualJoystickManager: "+VirtualJoystickManager.Instance.GetDirAndLength()/150);
         if (direction != Vector2.zero) {
 
             if (!rightMouseButtonDown) {
+                //Debug.Log("direction: " + direction);
                 player.movementByVelocityEvent.CallMovementByVelocityEvent(direction, moveSpeed);
             }
             else if (playerRollCooldownTimer <= 0f) {

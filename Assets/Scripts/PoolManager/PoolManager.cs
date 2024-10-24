@@ -24,6 +24,7 @@ public class PoolManager : SingletonMonobehaviour<PoolManager>
     #endregion Validation
     private void Start()
     {
+    
         objectPoolTransform = this.gameObject.transform;
 
         for (int i = 0; i < pools.Length; i++) {
@@ -37,6 +38,7 @@ public class PoolManager : SingletonMonobehaviour<PoolManager>
 
         string prefabName = prefab.name;
 
+        // 创建一个名为prefabName + "Anchor"的GameObject对象，并将其赋值给parentGameObject变量
         GameObject parentGameObject = new GameObject(prefabName + "Anchor");
 
         parentGameObject.transform.SetParent(objectPoolTransform);
@@ -51,17 +53,25 @@ public class PoolManager : SingletonMonobehaviour<PoolManager>
         }
     }
 
+    // 从预制件、位置和旋转创建一个可重用的组件
     public Component ReuseComponent(GameObject prefab, Vector3 position, Quaternion rotation) {
+        // 获取预制件的实例ID
         int poolKey = prefab.GetInstanceID();
 
+        // 如果池字典中包含该实例ID
         if (poolDictionary.ContainsKey(poolKey)) {
+            // 从池中获取一个组件
             Component componentToReuse = GetComponentFromPool(poolKey);
+            // 重置对象的位置和旋转
             ResetObject(prefab, position, rotation, componentToReuse);
 
+            // 返回可重用的组件
             return componentToReuse;
         }
         else {
+            // 如果池字典中不包含该实例ID，则输出日志
             Debug.Log("No object pool for" + prefab);
+            // 返回null
             return null;
         }
     }

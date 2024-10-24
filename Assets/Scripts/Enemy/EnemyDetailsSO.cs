@@ -33,6 +33,8 @@ public class EnemyDetailsSO : ScriptableObject
 
     public bool isHealthBarDisplayed = false;
 
+    public bool isBoss = false;
+
     #region Validation
 
 #if UNITY_EDITOR

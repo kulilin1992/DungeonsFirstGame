@@ -108,15 +108,15 @@ public class Chest : MonoBehaviour, IUseable
             chestState = ChestState.healthItem;
             InstantiateHealthItem();
         }
-        else if (weaponDetails != null)
-        {
-            chestState = ChestState.weaponItem;
-            InstantiateWeaponItem();
-        }
         else if (ammoPercent != 0)
         {
             chestState = ChestState.ammoItem;
             InstantiateAmmoItem();
+        }
+        else if (weaponDetails != null)
+        {
+            chestState = ChestState.weaponItem;
+            InstantiateWeaponItem();
         }
         else
         {

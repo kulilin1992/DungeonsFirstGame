@@ -35,6 +35,7 @@ public class Enemy : MonoBehaviour
 
     private EnemyMovementAI enemyMovementAI;
     private MaterializeEffect materializeEffect;
+
     //public EnemyDetailsSO enemyDetails;
 
     //weapon
@@ -49,6 +50,7 @@ public class Enemy : MonoBehaviour
     private Health health;
     private HealthEvent healthEvent;
 
+    private float bossStartHealth;
 
     private void Awake()
     {
@@ -86,8 +88,15 @@ public class Enemy : MonoBehaviour
 
     private void OnHealthLost(HealthEvent healthEvent, HealthEventArgs args)
     {
+
+        if (GameManager.Instance.bossHealthBarUI.activeSelf) {
+            Debug.Log("Boss Health damage");
+            //bossHealth.gameObject.SetActive(true);
+            GameManager.Instance.bossHealthBarUI.GetComponent<BossHealth>().UpdateStats(args.healthAmount, bossStartHealth);   
+        }
         if (args.healthAmount <= 0) {
             EnemyDestroyed();
+            GameManager.Instance.bossHealthBarUI.SetActive(false);
             //EnemyDisable();
         }
     }
@@ -123,6 +132,18 @@ public class Enemy : MonoBehaviour
     private void SetEnemyStartingHealth(DungeonLevelSO dungeonLevel) {
         foreach (EnemyHealthDetails enemyHealthDetails in enemyDetails.enemyHealthDetailsArray) {
             if (enemyHealthDetails.dungeonLevel == dungeonLevel) {
+                // if (bossHealth != null) {
+                //     Debug.Log("Boss Health AAA");
+                // }
+
+                if (enemyDetails.isBoss && GameManager.Instance.bossHealthBarUI != null) {
+                    Debug.Log("Boss Health");
+                    //bossHealth.gameObject.SetActive(true);
+                    GameManager.Instance.bossHealthBarUI.GetComponent<BossHealth>().Initialize(enemyHealthDetails.enemyHealthAmount, enemyHealthDetails.enemyHealthAmount);
+                    bossStartHealth = enemyHealthDetails.enemyHealthAmount;
+                    //bossHealth.Initialize(enemyHealthDetails.enemyHealthAmount, enemyHealthDetails.enemyHealthAmount);
+                }
+
                 health.SetStartingHealth(enemyHealthDetails.enemyHealthAmount);
                 return;
             }

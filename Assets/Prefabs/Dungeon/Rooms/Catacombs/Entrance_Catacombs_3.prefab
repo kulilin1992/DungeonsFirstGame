@@ -8999,6 +8999,7 @@ MonoBehaviour:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   enviromentGameObject: {fileID: 4094004531346887669}
+  moveableItemsList: []
 --- !u!114 &-7300569710797399730
 MonoBehaviour:
   m_ObjectHideFlags: 0

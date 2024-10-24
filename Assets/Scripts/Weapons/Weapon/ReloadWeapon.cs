@@ -68,7 +68,7 @@ public class ReloadWeapon : MonoBehaviour
             int totalAmmo = weapon.weaponRemainingAmmo + ammoIncrease;
 
             if (totalAmmo > weapon.weaponDetails.weaponClipAmmoCapacity) {
-                weapon.weaponRemainingAmmo = weapon.weaponDetails.weaponClipAmmoCapacity;
+                weapon.weaponRemainingAmmo = weapon.weaponDetails.weaponAmmoCapacity;
             }
             else {
                 weapon.weaponRemainingAmmo = totalAmmo;

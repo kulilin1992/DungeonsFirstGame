@@ -19,7 +19,7 @@ MonoBehaviour:
   hasInfiniteAmmo: 0
   hasInfiniteClipCapacity: 0
   weaponClipAmmoCapacity: 20
-  weaponAmmoCapacity: 60
+  weaponAmmoCapacity: 80
   weaponFireRate: 0.15
   weaponPrechargeTime: 0
   weaponReloadTime: 2

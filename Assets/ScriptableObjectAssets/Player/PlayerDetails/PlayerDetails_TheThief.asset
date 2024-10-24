@@ -15,7 +15,7 @@ MonoBehaviour:
   playerCharacterName: The Thief
   playerPrefab: {fileID: 7700997944513936930, guid: 0c88ba06117c3c440a90aed841f6a014, type: 3}
   runtimeAnimatorController: {fileID: 9100000, guid: 5a9246817726e404faf1ff23320ffaf5, type: 2}
-  playerHealthAmount: 80
+  playerHealthAmount: 100
   isImmuneAfterHit: 1
   hitImmunityTime: 2
   playerMiniMapIcon: {fileID: 21300000, guid: d642e4c72529ed74b8ce95e842701daf, type: 3}
@@ -23,5 +23,3 @@ MonoBehaviour:
   startingWeapon: {fileID: 11400000, guid: ca1e08437e8218b48939c04bd8f73325, type: 2}
   startingWeaponList:
   - {fileID: 11400000, guid: 2a90fb82aff29df4d80454fc965684e1, type: 2}
-  - {fileID: 11400000, guid: ca1e08437e8218b48939c04bd8f73325, type: 2}
-  - {fileID: 11400000, guid: 96e550f32c8ffe24e8386b6686694b3c, type: 2}

@@ -124,7 +124,7 @@ public class MainMenuUI : MonoBehaviour
     /// </summary>
     public void QuitGame()
     {
-        Application.Quit();
+        //Application.Quit();
     }
 
 

@@ -689,6 +689,7 @@ MonoBehaviour:
   idleEvent: {fileID: 0}
   aimWeaponEvent: {fileID: 0}
   fireWeaponEvent: {fileID: 0}
+  bossHealth: {fileID: 0}
 --- !u!95 &7308205684622035149
 Animator:
   serializedVersion: 5

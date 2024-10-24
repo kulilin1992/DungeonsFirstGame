@@ -18,7 +18,7 @@ MonoBehaviour:
   weaponCurrentAmmo: {fileID: 11400000, guid: fb014b4aca5b0db418d18ebda0206a8d, type: 2}
   hasInfiniteAmmo: 1
   hasInfiniteClipCapacity: 0
-  weaponClipAmmoCapacity: 10
+  weaponClipAmmoCapacity: 5
   weaponAmmoCapacity: 0
   weaponFireRate: 0.25
   weaponPrechargeTime: 0

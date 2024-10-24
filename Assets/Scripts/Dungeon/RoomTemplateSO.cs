@@ -146,7 +146,7 @@ public class RoomTemplateSO : ScriptableObject
 
                     }
                     if (isEnemyTypesListForDungeonLevel == false && roomEnemySpawnParamater.dungeonLevel != null) {
-                        Debug.Log($"No enemy types found for dungeon level {roomEnemySpawnParamater.dungeonLevel.levelName} in {name}.");
+                        //Debug.Log($"No enemy types found for dungeon level {roomEnemySpawnParamater.dungeonLevel.levelName} in {name}.");
                     }
                 }
             }

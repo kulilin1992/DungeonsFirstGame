@@ -8,14 +8,21 @@ using UnityEngine;
 public class RoomNodeGraphEditor : EditorWindow
 {
 
+    //定义房间节点样式
     private GUIStyle roomNodeStyle;
+    //定义房间节点选中样式
     private GUIStyle roomNodeSelectedStyle;
+    //定义当前房间节点图
     private static RoomNodeGraphSO currentRoomNodeGraph;
 
+    //定义房间节点图偏移量
     private Vector2 graphOffset;
+    //定义房间节点图拖动量
     private Vector2 graphDrag;
+    //定义房间节点类型列表
     private RoomNodeTypeListSO roomNodeTypeList;
 
+    //定义当前房间节点
     private RoomNodeSO currentRoomNode = null;
 
     //Node layout values
@@ -40,20 +47,32 @@ public class RoomNodeGraphEditor : EditorWindow
 
     private void OnEnable() {
 
+        // 添加Selection.selectionChanged事件监听器
         Selection.selectionChanged += InspectorSelectionChanged;
         //aa
+        // 创建roomNodeStyle样式
         roomNodeStyle = new GUIStyle();
+        // 设置roomNodeStyle的背景图片
         roomNodeStyle.normal.background = EditorGUIUtility.Load("node1") as Texture2D;
+        // 设置roomNodeStyle的文字颜色
         roomNodeStyle.normal.textColor = Color.white;
+        // 设置roomNodeStyle的内边距
         roomNodeStyle.padding = new RectOffset(nodePadding, nodePadding, nodePadding, nodePadding);
+        // 设置roomNodeStyle的边框
         roomNodeStyle.border = new RectOffset(nodeBorder, nodeBorder, nodeBorder, nodeBorder);
     
+        // 创建roomNodeSelectedStyle样式
         roomNodeSelectedStyle = new GUIStyle();
+        // 设置roomNodeSelectedStyle的背景图片
         roomNodeSelectedStyle.normal.background = EditorGUIUtility.Load("node1 on") as Texture2D;
+        // 设置roomNodeSelectedStyle的文字颜色
         roomNodeSelectedStyle.normal.textColor = Color.white;
+        // 设置roomNodeSelectedStyle的内边距
         roomNodeSelectedStyle.padding = new RectOffset(nodePadding, nodePadding, nodePadding, nodePadding);
+        // 设置roomNodeSelectedStyle的边框
         roomNodeSelectedStyle.border = new RectOffset(nodeBorder, nodeBorder, nodeBorder, nodeBorder);
     
+        // 获取GameResources中的roomNodeTypeList
         roomNodeTypeList = GameResources.Instance.roomNodeTypeList;
     }
 
@@ -63,9 +82,13 @@ public class RoomNodeGraphEditor : EditorWindow
 
     [OnOpenAsset(0)]
     public static bool OnDoubleClickAsset(int instanceID, int line) {
+        // 根据instanceID获取RoomNodeGraphSO对象
         RoomNodeGraphSO roomNodeGraph = EditorUtility.InstanceIDToObject(instanceID) as RoomNodeGraphSO;
+        // 如果获取成功
         if (roomNodeGraph != null) {
+            // 打开窗口
             OpenWindow();
+            // 将当前RoomNodeGraphSO对象赋值给currentRoomNodeGraph
             currentRoomNodeGraph = roomNodeGraph;
             return true;
         }
@@ -103,28 +126,38 @@ public class RoomNodeGraphEditor : EditorWindow
     }
 
     private void DrawBackgroundGrid(float gridSize, float gridOpacity, Color gridColor) {
+        // 计算垂直线数量
         int verticalLineCount = Mathf.CeilToInt((position.width + gridSize) / gridSize);   //垂直
+        // 计算水平线数量
         int horizontalLineCount = Mathf.CeilToInt((position.height + gridSize) / gridSize); // 水平
 
+        // 设置网格颜色和透明度
         Handles.color = new Color(gridColor.r, gridColor.g, gridColor.b, gridOpacity);
+        // 更新网格偏移量
         graphOffset += graphDrag * 0.5f;
 
+        // 计算网格偏移量
         Vector3 gridOffset = new Vector3(graphOffset.x % gridSize, graphOffset.y % gridSize, 0);
 
+        // 绘制垂直线
         for (int i = 0; i < verticalLineCount; i++) {
             Handles.DrawLine(new Vector3(gridSize * i, -gridSize, 0) + gridOffset, new Vector3(gridSize * i, position.height + gridSize, 0f) +
                 gridOffset);
         }
 
+        // 绘制水平线
         for (int j = 0; j< horizontalLineCount; j++) {
             Handles.DrawLine(new Vector3(-gridSize, gridSize * j, 0) + gridOffset, new Vector3(position.width + gridSize, gridSize * j, 0f) +
                 gridOffset);
         }
+        // 恢复网格颜色
         Handles.color = Color.white;
     }
 
     private void DrawDraggedLine() {
+// 如果当前房间节点图的线条位置不为零
         if (currentRoomNodeGraph.linePosition != Vector2.zero) {
+    // 绘制贝塞尔曲线，起点为当前房间节点图的房间节点中心，终点为线条位置，控制点为当前房间节点图的房间节点中心，线条颜色为白色，线条宽度为连接线宽度
             Handles.DrawBezier(currentRoomNodeGraph.roomNodeToDrawLineFrom.rect.center, currentRoomNodeGraph.linePosition,
                 currentRoomNodeGraph.roomNodeToDrawLineFrom.rect.center, currentRoomNodeGraph.linePosition, Color.white, null, connectingLineWidth);
         }
@@ -175,11 +208,15 @@ public class RoomNodeGraphEditor : EditorWindow
 
     private void ProcessMouseDownEvent(Event currentEvent)
     {
-        //shu biao you jian
+
+         // 如果当前事件是鼠标右键点击
         if (currentEvent.button == 1) {
+            // 显示右键菜单
             ShowContextMenu(currentEvent.mousePosition);
         } else if (currentEvent.button == 0) {
+            // 清除线拖拽
             ClearLineDrag();
+            // 清除所有选中的房间节点
             ClearAllSelectedRoomNodes();
         }
     }
@@ -211,14 +248,22 @@ public class RoomNodeGraphEditor : EditorWindow
 
     private void ShowContextMenu(Vector2 mousePosition)
     {
+        // 创建一个GenericMenu对象
         GenericMenu menu = new GenericMenu();
+        // 添加一个菜单项，点击后调用CreateRoomNode方法，并传入mousePosition参数
         menu.AddItem(new GUIContent("Create Room Node"), false, CreateRoomNode, mousePosition);
+        // 添加一个分隔符
         menu.AddSeparator("");
+        // 添加一个菜单项，点击后调用SelectAllRoomNodes方法
         menu.AddItem(new GUIContent("Select All Room Nodes"), false, SelectAllRoomNodes);
+        // 添加一个分隔符
         menu.AddSeparator("");
+        // 添加一个菜单项，点击后调用DeleteSelectedRoomNodeLinks方法
         menu.AddItem(new GUIContent("Delete Selected Room Node Links"), false, DeleteSelectedRoomNodeLinks);
+        // 添加一个菜单项，点击后调用DeleteSelectedRoomNodes方法
         menu.AddItem(new GUIContent("Delete Selected Room Nodes"), false, DeleteSelectedRoomNodes);
 
+        // 显示菜单
         menu.ShowAsContext();
     }
 
@@ -233,15 +278,21 @@ public class RoomNodeGraphEditor : EditorWindow
 
     private void CreateRoomNode(object mousePositionObj, RoomNodeTypeSO roomNodeType)
     {
+        //获取鼠标位置
         Vector2 mousePosition = (Vector2)mousePositionObj;
 
+        //创建一个RoomNodeSO实例
         RoomNodeSO roomNode = ScriptableObject.CreateInstance<RoomNodeSO>();
 
+        //将roomNode添加到currentRoomNodeGraph的roomNodeList中
         currentRoomNodeGraph.roomNodeList.Add(roomNode);
 
+        //初始化roomNode，设置位置、当前RoomNodeGraph和节点类型
         roomNode.Initialize(new Rect(mousePosition, new Vector2(nodeWidth, nodeHeight)), currentRoomNodeGraph, roomNodeType);
 
+        //将roomNode添加到AssetDatabase中
         AssetDatabase.AddObjectToAsset(roomNode, currentRoomNodeGraph);
+        //保存AssetDatabase中的更改
         AssetDatabase.SaveAssets();
 
 
